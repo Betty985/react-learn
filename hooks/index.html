@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello React!-Learn Hooks</title>
+
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState ,useEffect} = React
+        function Example() {
+            // 声明一个state变量
+            const [count, setCount] = useState(0)
+            useEffect(()=>{
+                document.title=`You clicked ${count} times`;
+            })
+            return (
+                <div>
+                    <p>You clicked {count} times</p>
+                    <button onClick={() => setCount(count + 1)}>
+                        Click me
+                    </button>
+                </div>
+            )
+        }
+        function ExampleWithManyStates() {
+            // 声明多个state变量
+            const [age, setAge] = useState(42)
+            const [fruit, setFruit] = useState('banana');
+            const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
+            return (
+                <div>
+                <p>age</p>
+                <p>fruit</p>
+                <p>todos</p>
+                </div>
+            )
+        }
+        function App() {
+            return (
+                <div>
+                <Example />
+                <ExampleWithManyStates />
+                </div>         
+            )
+        }
+        ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+</body>
+
+</html>
