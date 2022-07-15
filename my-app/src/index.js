@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { Loading } from './Components'
 import reportWebVitals from './reportWebVitals';
-
-
+const App = React.lazy(() => import('./App'))
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-
-  root.render(
-    <React.StrictMode>
+root.render(
+  <React.StrictMode>
+    <Suspense fallback={<Loading />}>
       <App />
-    </React.StrictMode>
-  );
+    </Suspense>
+  </React.StrictMode>
+);
 
 
 
