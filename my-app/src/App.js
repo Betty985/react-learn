@@ -1,16 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import {Clock,Todo} from './Components'
-
+import { Clock, Todo, TabsComponent, LoginControl } from './Components'
+function Tabs() {
+  const [tab, setTab] = React.useState('1')
+  const items = [
+    { name: '时间', ele: <Clock /> },
+    { name: '用户', ele: <LoginControl /> },
+     { name: '待办', ele: <Todo /> }
+  ]
+  function handleTabSelect(tab) {
+    setTab(tab)
+  }
+  return (
+    <>
+      <TabsComponent onChange={()=>handleTabSelect(tab)} items={items} defaultActiveKey='1' />
+    </>
+  )
+}
 
 function App() {
 
   return (
     <div className="App">
       <header className="App-header">
-        <Clock />
-        <Todo/>
+        <Tabs />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.

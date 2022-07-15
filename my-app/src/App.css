@@ -43,3 +43,15 @@
     transform: rotate(360deg);
   }
 }
+/* 标签 */
+.rc-tabs-nav-list{
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+}
+.rc-tabs-tab{
+  text-decoration:underline
+}
+.rc-tabs-tab-active{
+  color:#61dafb
+}
