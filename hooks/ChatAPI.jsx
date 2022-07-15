@@ -28,3 +28,27 @@ function FriendListItem(props){
         </li>
     )
 }
+const friendList=[
+    {id:1,name:'安安'},
+    {id:2,name:'泡泡'},
+    {id:3,name:'乐乐'}
+]
+function ChatRecipientPicker(){
+    const [recipientID,setRecipientID]=useState(1)
+    const isRecipientOnline=useFriendStatus(recipientID)
+    return (
+        <>
+        <Circle color={isRecipientOnline?'green':'red'}/>
+        <select
+        value={recipientID}
+        onChange={e=>setRecipientID(Number(e.target.value))}
+        >
+         {friendList.map(friend=>{
+            <option key={friend.id} value={friend.id}>
+                {friend.name}
+            </option>
+         })}
+        </select>
+        </>
+    )
+}
