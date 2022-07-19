@@ -16,3 +16,11 @@ export GIT_COMMITTER_EMAIL="newEmail"
 fi
 ' HEAD
 ```
+```
+git filter-branch -f --env-filter "
+GIT_AUTHOR_NAME='newName';
+GIT_AUTHOR_EMAIL='newEmail';
+GIT_COMMITTER_NAME='newName';
+GIT_COMMITTER_EMAIL='newEmail'
+" HEAD
+```
