@@ -1,0 +1,1 @@
+export {removeAttr} from './removeAttribute.ts'

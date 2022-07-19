@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  list-style-type:none
+  list-style-type: none
 }
 
 .App-logo {
@@ -28,10 +28,12 @@
 .App-link {
   color: #61dafb;
 }
-.unfinished{
+
+.unfinished {
   background-color: green;
 }
-.finished{
+
+.finished {
   background-color: red;
 }
 
@@ -39,19 +41,43 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 /* 标签 */
-.rc-tabs-nav-list{
+
+.rc-tabs-nav-wrap{
+  width:400px;
+  height: 40px;
+}
+.rc-tabs-nav-list {
   display: flex;
   justify-content: space-between;
   justify-items: center;
+ 
 }
-.rc-tabs-tab{
-  text-decoration:underline
+.rc-tabs-tab {
+  text-decoration: underline
 }
-.rc-tabs-tab-active{
-  color:#61dafb
+.rc-tabs-tab-active {
+  color: #61dafb
+}
+
+/* 弹窗 */
+.modal {
+  background-color: #282c34;
+  border: 1px solid #61dafb;
+  color: #61dafb;
+  z-index: 999;
+  position: fixed;
+  height: 50%;
+  width: 50%;
+  top: 10%;
+  left: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

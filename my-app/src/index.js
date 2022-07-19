@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import {removeAttr} from './tools'
 import { Loading } from './Components'
 import reportWebVitals from './reportWebVitals';
 const App = React.lazy(() => import('./App'))
