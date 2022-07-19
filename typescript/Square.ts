@@ -116,7 +116,98 @@ interface SelectableControl extends Control{
 class Button extends Control implements SelectableControl{
   select(){}
 }
-class Image implements SelectableControl{
-  // private state:any  为什么不行？
-  select() {  }
+
+// class Image implements SelectableControl{
+//   private state:any  
+//   select() {  }
+// }
+// 报错信息：类“Image”错误实现接口“SelectableControl”。类型具有私有属性“state”的单独声明。
+// ts使用的是结构性类型系统。比较两种不同的类型时，如果所有成员的类型都是兼容的，那么它们的类型就是兼容的。当比较private或protected成员时，如果一个类型包含private或者protected成员，只有另外一个类型中也存在这样一个成员，并且它们来自同一处声明时，才认为这两个类型时兼容的。
+
+// private成员不能在声明它的类的外部访问。protected成员在派生类中仍然可以访问。
+
+// readonly 关键字将属性设置为只读的，只读属性必须在声明时或构造函数里被初始化。
+
+// 参数属性通过给构造函数添加一个访问限定符来声明。在一个地方定义并初始化一个成员。
+class Animal{
+  constructor(private name:string){
+
+  }
+  move(distanceInMeters:number){
+    console.log(`${this.name} moved ${distanceInMeters}m`)
+  }
 }
+
+let passcode='secret'
+class Employee{
+  private _fullName:string
+  get fullName():string{
+    return this._fullName
+  }
+  set fullName(newName:string){
+    if(passcode&&passcode == 'secret'){
+      this._fullName=newName
+    }
+    else {
+      console.log("Error: Unauthorized update of employee!");
+    }
+  }
+}
+let employee=new Employee()
+employee.fullName='Bob '
+if(employee.fullName){
+  console.log(employee.fullName)
+}
+
+// static定义的静态属性存在于类本身上。实例访问这个属性需要在属性前加上类名.
+
+// 抽象类做为其他派生类的基类使用，可以包含成员的实现细节。一般不会直接被实例化。abstract关键字是用于定义抽象类和在抽象类内部定义抽象方法。
+
+abstract class Department{
+  constructor(public name :string){}
+  printName():void{
+    console.log('Department name'+this.name)
+  }
+  abstract printMeeting():void
+}
+class AccountingDepartment extends Department{
+  constructor(){
+    super('Accounting and Auditing')
+  }
+  printMeeting(): void {
+    console.log('the accounting Department meets each Monday at 10am')
+  }
+  generateReports():void{
+    console.log('generating accounting reports..')
+  }
+}
+// 创建一个对抽象类型的引用
+let department:Department
+// department=new Department() 无法创建抽象类的实例。
+// 对抽象子类进行实例化和赋值
+department= new AccountingDepartment()
+department.printName()
+department.printMeeting()
+// department.generateReports() 类型“Department”上不存在属性“generateReports”。
+
+// let instance : ClassA; 表示的是 instance 的类型是ClassA的实例。let classA: typeof ClassA; 表示的是 classA 的类型就是 ClassA。
+// 在 TypeScript 中，typeof 操作符可以用来获取一个变量或对象的类型。
+class Greeter{
+  static standardGreeting='hello , there';
+  greeting:string
+  greet(){
+    if(this.greeting){
+      return 'hello,'+this.greeting
+    }else{
+      return Greeter.standardGreeting
+    }
+  }
+}
+let greeter1:Greeter
+greeter1=new Greeter()
+console.log(greeter1.greet())
+// typeof Greeter，意思是取Greeter类的类型
+let greeterMaker:typeof Greeter   = Greeter
+greeterMaker.standardGreeting='hey snowball'
+let greeter2:Greeter=new greeterMaker()
+console.log(greeter2.greeting)
