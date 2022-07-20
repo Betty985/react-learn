@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import {Profiler} from 'react'
-import { Clock, Todo, TabsComponent, LoginControl, ModalControl } from './Components'
+import { Profiler } from 'react'
+import { Clock, Todo, TabsComponent, LoginControl, ModalControl, TickTock } from './Components'
 import { onRenderCallback } from './tools'
 let container = document.getElementById('container')
 function Tabs() {
@@ -11,7 +11,8 @@ function Tabs() {
     { name: '时间', ele: <Clock /> },
     { name: '用户', ele: <LoginControl /> },
     { name: '待办', ele: <Todo /> },
-    { name: '弹窗', ele: <ModalControl container={container} /> }
+    { name: '弹窗', ele: <ModalControl container={container} /> },
+    { name: '计时', ele: <TickTock /> }
   ]
   function handleTabSelect(tab) {
     setTab(tab)
