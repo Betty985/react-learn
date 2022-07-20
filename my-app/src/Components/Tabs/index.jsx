@@ -7,7 +7,7 @@ function TabsComponent({
 }) {
     let TabPanes = items.map((item, i) => {
         return (
-            <TabPane tab={item.name} key={i} >
+            <TabPane tab={item.name} key={item.name} >
                 {item.ele}
             </TabPane>
         )
