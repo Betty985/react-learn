@@ -1,4 +1,5 @@
-
+import React from 'react'
+const e = React.createElement
 var createReactClass = require('create-react-class')
 var Greeting = createReactClass({
     // 声明默认属性
@@ -19,14 +20,14 @@ var Greeting = createReactClass({
         alert(this.state.message)
     },
     render: function () {
-        return (
-            <div>
-                <h1>Hello,{this.props.name}.我没有使用ES6</h1>
-                <button onClick={this.handleClick}>
-                    Say hello
-                </button>
-            </div>
-        )
+        return e("div",
+            null,
+            e("h1",
+                null,
+                "Hello,", this.props.name, "! no ES6 or jsx"),
+            e("button", {
+                onClick: this.handleClick
+            }, "Say hello"));
     }
 })
 var SetIntervalMixin = {
@@ -53,14 +54,9 @@ var TickTock = createReactClass({
         this.setState({ seconds: this.state.seconds + 1 })
     },
     render: function () {
-        return (
-            <div>
-                <Greeting />
-                <p>
-                    React has been running for {this.state.seconds} seconds.
-                </p>
-            </div>
-        )
+        return e("div", null,
+            e(Greeting, null),
+            e("p", null, "React has been running for ", this.state.seconds, " seconds."));
     }
 })
 export { TickTock }
