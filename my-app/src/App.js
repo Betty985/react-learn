@@ -2,24 +2,25 @@ import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import { Profiler } from 'react'
-import { Clock, Todo, TabsComponent, LoginControl, ModalControl, TickTock } from './Components'
+import { Clock, Todo, TabsComponent, LoginControl, ModalControl, TickTock ,Input} from './Components'
 import { onRenderCallback } from './tools'
 let container = document.getElementById('container')
 function Tabs() {
-  const [tab, setTab] = React.useState('1')
+  const [tab, setTab] = React.useState('时间')
   const items = [
     { name: '时间', ele: <Clock /> },
     { name: '用户', ele: <LoginControl /> },
     { name: '待办', ele: <Todo /> },
     { name: '弹窗', ele: <ModalControl container={container} /> },
-    { name: '计时', ele: <TickTock /> }
+    { name: '计时', ele: <TickTock /> },
+    { name: '输入框', ele: <Input /> }
   ]
   function handleTabSelect(tab) {
     setTab(tab)
   }
   return (
     <>
-      <TabsComponent onChange={() => handleTabSelect(tab)} items={items} defaultActiveKey='1' />
+      <TabsComponent onChange={() => handleTabSelect(tab)} items={items} defaultActiveKey='时间' />
     </>
   )
 }
