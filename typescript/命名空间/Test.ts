@@ -1,3 +1,6 @@
+/// <reference path="Validation.ts" />
+/// <reference path="LettersOnlyValidator.ts" />
+/// <reference path="ZipCodeValidator.ts" />
 let strings = ["Hello", "98052", "101"];
 
 // Validators to use
