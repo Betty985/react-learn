@@ -33,7 +33,7 @@ function Tabs(props) {
 
 function App() {
   let { mouse, handleMouseMove,MouseContext } = useMouse()
-  console.log('app', mouse)
+  // console.log('app', mouse)
   return (
     <div className="App" onMouseMove={handleMouseMove}>
       <MouseContext.Provider value={mouse}>
