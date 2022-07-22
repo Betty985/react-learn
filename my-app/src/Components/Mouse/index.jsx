@@ -16,6 +16,7 @@ function Cat(props) {
 */
 function  Mouse (props){
     let contextType=props.MouseContext
+    console.log(contextType)
     return (
         <div>
             {props.children(contextType)}
