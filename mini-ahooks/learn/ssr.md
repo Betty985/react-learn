@@ -1,0 +1,8 @@
+- 不要在非 useEffect/useLayoutEffect 中，直接使用 DOM/BOM 属性
+- 在非 useEffect/useLayoutEffect 使用 DOM/BOM 属性时，使用 isBrowser 判断是否在浏览器环境执行
+- 如果某个 Hook 需要接收 DOM/BOM 属性，需要支持函数形式传参。函数形式的好处：
+    - 可以 thunk 
+      - > Thunk 是一类函数的别名，主要特征是对另外一个函数添加了一些额外的操作，类似装饰器。其主要用途为延迟函数执行（惰性求值）或者给一个函数执行前后添加一些额外的操作。
+    - 懒加载
+      - 延迟求值，可以在事件触发时拿到正确的值
+      - 提高性能。（假如 getElementById 里面有很重的逻辑，但是调用方由用不到 target 这个 key，就可以省下这部分消耗。）
