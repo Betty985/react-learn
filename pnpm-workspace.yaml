@@ -1,0 +1,3 @@
+packages:
+   # 可以写多个
+   - 'packages/*'
