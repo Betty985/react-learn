@@ -16,10 +16,11 @@ Git提供了一个命令`git reflog`用来记录你的每一次命令
 git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit
 git reset 是把HEAD向后移动了一下，而git revert是HEAD继续前进，只是新的commit的内容和要revert的内容正好相反，能够抵消要被revert的内容
 在回滚这一操作上看，效果差不多。但是在日后继续 merge 以前的老版本时有区别
-# 查看vs code 已安装的扩展
+# ahooks
+## 查看vs code 已安装的扩展
 `code --list-extensions`
 可以用于在`.vscode`文件夹下的`extensions.json`中推荐vs code插件。
-# monorepo (pnpm)
+## monorepo (pnpm)
 - `pnpm init`
 - 手动创建`pnpm-workspace.yaml`文件进行配置
 
@@ -29,5 +30,8 @@ yaml文件基本语法：
 - 缩进不允许使用tab，只允许空格
 - 缩进的空格数不重要，只要相同层级的元素左对齐即可
 - '#'表示注释
-# .gitignore文件
-不被git跟踪的文件
+## .gitignore文件
+列出不被git跟踪的文件
+## .npmrc 文件
+pnpm 从命令行、环境变量和 .npmrc 文件中获取其配置。
+pnpm config 命令可用于更新和编辑 用户和全局 .npmrc 文件的内容。

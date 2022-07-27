@@ -1,3 +1,5 @@
+# 如果启用了此选项，工作空间中的本地 package 将优先于注册表，即使注册表中有了该 package 的新版本。
+prefer-workspace-packages:true
 packages:
    # 可以写多个
    - 'packages/*'
