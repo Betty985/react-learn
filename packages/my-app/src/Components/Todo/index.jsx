@@ -91,7 +91,6 @@ export class Todo extends React.Component {
     update(msg, i) {
         let history = this.state.items.slice()
         history[i].msg = msg
-        console.log('hello', history)
         this.setState(() => ({ items: history }))
     }
     finish(i) {
