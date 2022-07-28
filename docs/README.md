@@ -73,6 +73,12 @@ npm install --save-dev --save-exact prettier
 这可以在编译期间节省时间，但会牺牲类型系统的准确性。
 - `allowSyntheticDefaultImports`允许合成默认导入
 - `declaration`为项目中的每个 TypeScript 或 JavaScript 文件生成.d.ts文件。这些.d.ts文件是描述模块外部 API 的类型定义文件。借助.d.ts文件，TypeScript 等工具可以为无类型代码提供智能感知和准确类型。
+- include和exclude都支持使用通配符：
+```
+*匹配零个或者多个字符（包括目录的分隔符）
+?匹配任一字符（包括目录分隔符）
+**/匹配任何层级的嵌套目录
+```
 ## webpack
 ### webpack.common.js
 development(开发环境) 和 production(生产环境) 这两个环境下的构建目标存在着巨大差异。在开发环境中，我们需要：强大的 source map 和一个有着 live reloading(实时重新加载) 或 hot module replacement(热模块替换) 能力的 localhost server。而生产环境目标则转移至其他方面，关注点在于压缩 bundle、更轻量的 source map、资源优化等，通过这些优化方式改善加载时间。由于要遵循逻辑分离，我们通常建议为每个环境编写彼此独立的 webpack 配置。
@@ -92,3 +98,4 @@ development(开发环境) 和 production(生产环境) 这两个环境下的构�
 - [prettier](https://prettier.io/docs/en/configuration.html#docsNav)
 - [ts](https://www.typescriptlang.org/tsconfig#declaration)
 - [webpack](https://webpack.docschina.org/guides/production/#setup)
+- [TSConfig 之 include、exclude 和 files 选项](https://juejin.cn/post/6924264635218542605)
