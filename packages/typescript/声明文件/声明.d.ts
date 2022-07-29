@@ -40,6 +40,8 @@ declare namespace GreetingLib.Options {
   }
 // 类
 declare class Greeter1 {
+    alert(arg0: { modal: boolean; title: string; }):void
+    log(arg0: { verbose: boolean; }):void
     constructor(greeting: string);
     greeting: string;
     showGreeting(): void;
