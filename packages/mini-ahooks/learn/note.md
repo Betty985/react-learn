@@ -56,6 +56,7 @@ Yarn Workspaces 是一个底层的工具，它负责处理包的安装、在项�
 - Lerna CLI --scope 并不可靠并且难以理解和使用；
 - 有一个 wizard 在常见任务中帮助我们，但它更像是在主仓库之外维护的。
 - Lerna 目前是没有维护的;
+- 不适合增量构建、测试
 ### PNPM Workspace
 pnpm是一个 JavaScript 项目的包管理工具，与 npm 和 Yarn功能一样，只是更加高效。
 #### 好处
