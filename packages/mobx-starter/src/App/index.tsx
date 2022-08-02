@@ -3,7 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 import routes from "./../config";
 import { Button } from "antd";
 import './../styles/index.css'
-import "antd/dist/antd.css";
+
 const App: React.FC = () => {
   return (
     <div className="app">

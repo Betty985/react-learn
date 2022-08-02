@@ -3,6 +3,7 @@ import React from "react";
 import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Timer, Todo } from "./components/index";
+import "antd/dist/antd.css";
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <BrowserRouter>
