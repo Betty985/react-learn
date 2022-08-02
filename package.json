@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "husky": "^8.0.1"
+    "husky": "^8.0.1",
+    "json5": "^2.2.1",
+    "mobx": "^6.6.1"
   }
 }
