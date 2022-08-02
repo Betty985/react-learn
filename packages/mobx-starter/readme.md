@@ -1,3 +1,4 @@
+# mobx笔记
 state是驱动应用程序的数据；
 Action 是任意可以改变 State的代码；
 任何来源是State并且不需要进一步交互的东西都是 Derivation；
@@ -10,3 +11,7 @@ Mobx 区分了两种 Derivation :
 # 问题
 - [TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
     at new NodeError (node:internal/errors:372:5)](https://stackoverflow.com/questions/60234640/typeerror-err-invalid-arg-type-the-path-argument-must-be-of-type-string-re):将`react-scripts`从3.3.x升级到3.4.x
+- [react-expected-an-assignment-or-function-call-and-instead-saw-an-expression-no](https://stackoverflow.com/questions/55332168/react-expected-an-assignment-or-function-call-and-instead-saw-an-expression-no):`/* eslint-disable */`添加到文件顶部
+- ant designe组件样式不生效：`import { Button } from "antd"; import "antd/dist/antd.css";`
+- tsx报错的时候可以先改成jsx  /(ㄒoㄒ)/~~
+-[ react怎么使用样式](https://segmentfault.com/a/1190000018114118)
