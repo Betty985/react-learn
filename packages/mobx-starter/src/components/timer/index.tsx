@@ -17,5 +17,5 @@ setInterval(()=>{
 const TimerView=observer(({timer}:{timer:Timer})=>(
     <span>Seconds passed: {timer.secondsPassed}</span>
 ))
-const firstTimer= ()=><TimerView timer={myTimer}/>
-export default firstTimer
+const TimerApp= ()=><TimerView timer={myTimer}/>
+export default TimerApp
