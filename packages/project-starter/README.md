@@ -11,6 +11,13 @@ npm start
 ```
 npm install --save react-router-dom
 ```
+# bug
+## 无法使用 JSX，除非提供了 "--jsx" 标志。ts(17004)
+重启编译器
+```shell
+# 查看ts版本
+npm view typescript version 
+```
 # 笔记
 ## pwa
 PWA：运用现代的 Web API 以及传统的渐进式增强策略来创建跨平台 Web 应用程序。PWA 是可被发现、易安装、可链接、独立于网络、渐进式、可重用、响应性和安全的。
@@ -21,4 +28,9 @@ web-vitals库是一个小型 (~1K) 模块化库，用于测量真实用户的所
 - [React结合TypeScript和Mobx初体验](https://segmentfault.com/a/1190000015002112)
 - [progressive-web-app](https://create-react-app.dev/docs/making-a-progressive-web-app/)
 - [MDN:PWA](https://developer.mozilla.org/zh-CN/docs/Web/Progressive_web_apps)
+- [react-admin](https://github.com/marmelab/react-admin)
+- [react-mobx-realworld-example-app](https://github.com/gothinkster/react-mobx-realworld-example-app/tree/master/src)
+- [mobx-router](https://github.com/kitze/mobx-router)
+## 工具包
+- [reactrouter](https://v5.reactrouter.com/web/guides/primary-components)
 - [web-vitals](https://www.npmjs.com/package/web-vitals)
