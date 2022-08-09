@@ -6,3 +6,7 @@ git 初始化：`git init`
 # [webpack](https://www.webpackjs.com/concepts/)
 ## 相关问题
 - [Front-End-Interview](https://github.com/lf2021/Front-End-Interview/blob/master/12.Webpack/webpack.md)
+#   jest.useFakeTimers('modern');报错
+> - jest.useFakeTimers('modern')
+> + jest.useFakeTimers()
+> ——[官网](https://jestjs.io/zh-Hans/docs/upgrading-to-jest28#jestusefaketimers)

@@ -22,18 +22,19 @@
             ]
         },
         "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
         "declaration": false,
         "strictNullChecks": true
     },
     "exclude": [
         "node_modules",
-        ".prettierrc",
         "lib",
         "es",
         "dist",
         "**/__tests__",
         "**/__test__",
         "**/demo",
-        "example"
-    ]
+        "example",
+        "gulpfile.js"
+    ],
 }

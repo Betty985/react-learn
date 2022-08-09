@@ -8,15 +8,31 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "ahooks": ["./packages/hooks/src/index.ts"],
-      "ahooks/lib/*": ["./packages/hooks/src/*"],
-      "@ahooksjs/use-url-state": ["./packages/use-url-state/src/index.ts"]
+      "@/*": [
+        "src/*"
+      ],
+      "ahooks": [
+        "./packages/hooks/src/index.ts"
+      ],
+      "ahooks/lib/*": [
+        "./packages/hooks/src/*"
+      ],
+      "@ahooksjs/use-url-state": [
+        "./packages/use-url-state/src/index.ts"
+      ]
     },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "declaration": false,
     "strictNullChecks": true
   },
-  "exclude": ["node_modules", "lib", "es", "dist", "example"]
+  "exclude": [
+    "node_modules",
+    "lib",
+    "es",
+    "dist",
+    "example",
+    "**/__tests__",
+    "**/__test__",
+  ],
 }
