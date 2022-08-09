@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm  -C packages/my-app run dev"
   },
-  "keywords": [],
+  "keywords": ["mobx","react"],
   "author": "",
   "license": "ISC",
   "dependencies": {
