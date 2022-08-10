@@ -44,7 +44,7 @@ class Header extends React.Component{
     render() {
         return (
             <nav>
-                 <LoggedOutView currentUser={this.props.userStore.currentUser} />
+                 <LoggedOutView currentUser={''} />
             </nav>
         )
     }
