@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "s": "react-scripts start",
+    "eject": "react-scripts eject",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
+    "react-scripts": "^5.0.1"
   }
 }
