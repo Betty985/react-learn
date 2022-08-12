@@ -5,9 +5,9 @@ import Login from "./pages/Login";
 const App: FC = () => {
   return (
     <div>
-      <Header/>
+      <Header />
       <Switch>
-        <Route  path="/login" component={Login}/>
+        <Route path="/login" component={Login} />
       </Switch>
     </div>
   );

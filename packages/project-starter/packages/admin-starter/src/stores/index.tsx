@@ -1,4 +1,2 @@
-import UserStore from './userStore'
-export default{
-    UserStore
-}
+import userStore from './userStore'
+export default {userStore}
