@@ -1,5 +1,5 @@
 import { makeAutoObservable,action } from "mobx";
-import { Auth } from "@/apis/agent";
+import { Auth } from "../apis/agent";
 const CommentsStore={
     isCreatingComment :false,
     isLoadingComments : false,
