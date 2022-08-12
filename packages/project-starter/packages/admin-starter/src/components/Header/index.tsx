@@ -25,7 +25,7 @@ const LoggedOutView:FC<LoggedOutProps>=props=>{
             {navArr.map((item)=>{
                 const {path,title}=item
                 return (
-                    <li>
+                    <li key={title}>
                         <Link to={path}>
                             {title}
                         </Link>
@@ -38,7 +38,7 @@ const LoggedOutView:FC<LoggedOutProps>=props=>{
     return null
 }
 
-@inject('userStore')
+
 @observer
 class Header extends React.Component{
     render() {

@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { Auth } from "@/apis/agent";
+import { Auth } from "../apis/agent";
 const UserStore = makeAutoObservable({
   currentUser: "",
   loadingUser: "",
