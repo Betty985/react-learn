@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { Auth } from "../apis/agent";
+console.log(Auth.current());
 const UserStore = makeAutoObservable({
   currentUser: "",
   loadingUser: "",
