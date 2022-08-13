@@ -19,5 +19,4 @@ function request(options) {
     return request({ url, data, method: item, ...options });
   };
 });
-
 export default request;
