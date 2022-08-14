@@ -1,18 +1,40 @@
-import { makeAutoObservable } from "mobx";
-import { Auth } from "../apis/agent";
-console.log(Auth.current());
+import { action, makeAutoObservable } from "mobx";
+import { auth } from "../apis/agent";
 const UserStore = makeAutoObservable({
   currentUser: "",
-  loadingUser: "",
+  loadingUser: false,
   updatingUser: "",
   updatingUserErrors: "",
   pullUser() {
     this.loadingUser = true;
-    return Auth.current();
+    return auth
+      .current()
+      .then(
+        action((props) => {
+          const { user } = props;
+          this.currentUser = user;
+        })
+      )
+      .finally(
+        action(() => {
+          this.loadingUser = false;
+        })
+      );
   },
   updateUser(newUser) {
     this.updatingUser = true;
-    return Auth.save();
+    return auth
+      .save(newUser)
+      .then(
+        action(({ user }) => {
+          this.currentUser = user;
+        })
+      )
+      .finally(
+        action(() => {
+          this.updatingUser = false;
+        })
+      );
   },
   forgetUser() {
     this.currentUser = undefined;

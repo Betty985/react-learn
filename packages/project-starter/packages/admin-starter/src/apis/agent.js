@@ -1,14 +1,13 @@
 import request from "./request";
 import authStore from "../stores/authStore";
-console.log(request);
 const handleErrors = (err) => {
   if (err?.response.status === 401) {
-    // authStore.logout();
+    authStore.logout();
   }
   return err;
 };
 const responseBody = (res) => res.body;
-const Auth = {
+const auth = {
   current: () => request.get("/user"),
   login: (email, password) =>
     request.post("/user/login", { user: { email, password } }),
@@ -16,13 +15,13 @@ const Auth = {
     request.post("/users", { user: { username, email, password } }),
   save: (user) => request.put("/user", { user }),
 };
-const Tags = {
+const tags = {
   getAll: () => request.get("/tags"),
 };
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = (article) => Object.assign({}, article, { slug: undefined });
 
-const Articles = {
+const articles = {
   all: (page, lim = 10) => request.get(`/articles?${limit(lim, page)}`),
   byAuthor: (author, page) =>
     request.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
@@ -40,7 +39,7 @@ const Articles = {
   create: (article) => request.post("/articles", { article }),
 };
 
-const Comments = {
+const comments = {
   create: (slug, comment) =>
     request.post(`/articles/${slug}/comments`, { comment }),
   delete: (slug, commentId) =>
@@ -48,10 +47,10 @@ const Comments = {
   forArticle: (slug) => request.get(`/articles/${slug}/comments`),
 };
 
-const Profile = {
+const profile = {
   follow: (username) => request.post(`/profiles/${username}/follow`),
   get: (username) => request.get(`/profiles/${username}`),
   unfollow: (username) => request.del(`/profiles/${username}/follow`),
 };
 
-export { Auth, Tags, Articles, Comments, Profile };
+export { auth, tags, articles, comments, profile };

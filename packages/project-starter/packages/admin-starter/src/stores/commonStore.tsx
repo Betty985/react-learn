@@ -1,5 +1,5 @@
 import { observable, action, reaction } from "mobx";
-import { Tags } from "../apis/agent";
+import * as agent from "../apis/agent";
 class CommonStore {
   @observable appName = "Conduit";
   @observable token = window.localStorage.getItem("jwt");
@@ -18,10 +18,10 @@ class CommonStore {
       }
     );
   }
-  
+
   @action loadTags() {
     this.isLoadingTags = true;
-    return Tags.getAll()
+    return agent.tags.getAll();
   }
 
   @action setToken(token) {
@@ -32,4 +32,4 @@ class CommonStore {
     this.appLoaded = true;
   }
 }
-export default new CommonStore()
+export default new CommonStore();
