@@ -32,4 +32,5 @@ class CommonStore {
     this.appLoaded = true;
   }
 }
-export default new CommonStore();
+const commonStore = new CommonStore();
+export default commonStore;
