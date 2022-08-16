@@ -8,10 +8,10 @@ const App: FC = () => {
     <>
       <Header />
       <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Test />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Test />} />
         <Route
-          path="*"
+          path="/*"
           element={
             <main style={{ padding: "1rem" }}>
               <p>什么都没有呢~</p>

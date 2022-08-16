@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { observer, inject } from "mobx-react";
 import { loggedOutArr } from "./route";
-
+import useStores from "../../hooks/useStores";
 interface LoggedProps {
   currentUser: any;
 }
@@ -28,48 +28,54 @@ const LoggedOutView: FC<LoggedProps> = (props) => {
 };
 
 const LoggedInView: FC<LoggedProps> = (props) => {
-  return (
-    <ul className="nav navbar-nav pull-xs-right">
-      <li className="nav-item">
-        <Link to="/" className="nav-link">
-          主页
-        </Link>
-      </li>
+  if (props.currentUser) {
+    return (
+      <ul className="nav navbar-nav pull-xs-right">
+        <li className="nav-item">
+          <Link to="/" className="nav-link">
+            主页
+          </Link>
+        </li>
 
-      <li className="nav-item">
-        <Link to="/editor" className="nav-link">
-          <i className="ion-compose" />
-          &nbsp;发帖
-        </Link>
-      </li>
+        <li className="nav-item">
+          <Link to="/editor" className="nav-link">
+            <i className="ion-compose" />
+            &nbsp;发帖
+          </Link>
+        </li>
 
-      <li className="nav-item">
-        <Link to="/settings" className="nav-link">
-          <i className="ion-gear-a" />
-          &nbsp;设置
-        </Link>
-      </li>
+        <li className="nav-item">
+          <Link to="/settings" className="nav-link">
+            <i className="ion-gear-a" />
+            &nbsp;设置
+          </Link>
+        </li>
 
-      <li className="nav-item">
-        <Link to={`/@${props.currentUser}`} className="nav-link">
-          <img src={props.currentUser} className="user-pic" alt="" />
-          {props.currentUser}
-        </Link>
-      </li>
-    </ul>
-  );
+        <li className="nav-item">
+          <Link to={`/@${props.currentUser}`} className="nav-link">
+            <img src={props.currentUser} className="user-pic" alt="" />
+            {props.currentUser}
+          </Link>
+        </li>
+      </ul>
+    );
+  }
+  return null;
 };
 
-const Header: FC = () => (
-  <nav className="navbar navbar-light">
-    <div className="container">
-      <Link to="/" className="navbar-brand">
-        {"Conduit".toLowerCase()}
-      </Link>
-      <LoggedOutView currentUser={""} />
-      <LoggedInView currentUser={""} />
-    </div>
-  </nav>
-);
-inject("userStore")(observer(Header));
+const Header: FC = () => {
+  const { userStore, commonStore } = useStores();
+  return (
+    <nav className="navbar navbar-light">
+      <div className="container">
+        <Link to="/" className="navbar-brand">
+          {commonStore.appName.toLowerCase()}
+        </Link>
+        <LoggedOutView currentUser={userStore.currentUser} />
+        <LoggedInView currentUser={userStore.currentUser} />
+      </div>
+    </nav>
+  );
+};
+observer(Header);
 export default Header;
