@@ -39,6 +39,7 @@ web-vitals库是一个小型 (~1K) 模块化库，用于测量真实用户的所
 - [mobx-router](https://github.com/kitze/mobx-router)
 - [react-router](https://github.com/remix-run/react-router/blob/main/docs/getting-started/tutorial.md)
 - [ Provider/inject迁移指南](https://mobx-react.js.org/recipes-migration)
+- [路由守卫](https://juejin.cn/post/7101925921103282183)
 ## 工具包
 - [reactrouter](https://v5.reactrouter.com/web/guides/primary-components)
 - [web-vitals](https://www.npmjs.com/package/web-vitals)

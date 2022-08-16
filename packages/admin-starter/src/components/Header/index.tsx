@@ -24,7 +24,7 @@ const LoggedOutView: FC<LoggedProps> = (props) => {
       </ul>
     );
   }
-  return null;
+  return <></>;
 };
 
 const LoggedInView: FC<LoggedProps> = (props) => {
@@ -60,7 +60,7 @@ const LoggedInView: FC<LoggedProps> = (props) => {
       </ul>
     );
   }
-  return null;
+  return <></>;
 };
 
 const Header: FC = () => {
