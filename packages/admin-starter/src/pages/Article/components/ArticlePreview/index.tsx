@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import useStores from "../../hooks/useStores";
+import useStores from "../../../../hooks/useStores";
 const FAVORITED_CLASS = "btn btn-sm btn-primary";
 const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary";
+
 interface A{
   article:any
 }
