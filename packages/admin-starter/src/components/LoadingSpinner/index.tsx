@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import  './index.module.scss'
+import  styles from './index.module.scss'
 
-const LoadingSpinner:FC = () => <div className={'loading-spinner'}></div>;
+const LoadingSpinner:FC = () => <div className={styles['loading-spinner']}></div>;
 export default LoadingSpinner;
