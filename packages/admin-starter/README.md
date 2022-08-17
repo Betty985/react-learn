@@ -1,16 +1,9 @@
 React + MobX + TypeScript + React-router
-# 步骤
-## 使用Create-React-App来建立TypeScript的环境
-```
-npm i -g create-react-app
-create-react-app name  --template typescript
-cd name
-npm start
-```
-## 加入React-Router
-```
-npm install --save react-router-dom
-```
+# todo
+- [x] scss声明文件
+- [ ] 路由守卫
+- [ ] 页面
+- [ ] husky
 # bug
 ## 无法使用 JSX，除非提供了 "--jsx" 标志。ts(17004)
 重启编译器
