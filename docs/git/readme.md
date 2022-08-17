@@ -42,5 +42,11 @@ git  rebase -i HEAD~3
 `git add .`
 暂存文件：`git stash`
 弹出文件：`git stash pop` 
+- 查看git的用户的邮箱和用户名
+`git config user.name`
+`git config user.email`
+- `git checkout -b` :基于当前分支，检出一个新的分支，并切换到新分支
+- `git branch -d <branch>` :删除一个分支
+- `git branch --set-upstream-to 远程分支 本地分支`：切换远程分支
 # 参考资料
 - [rebase 用法小结](https://www.jianshu.com/p/4a8f4af4e803)
