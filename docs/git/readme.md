@@ -38,7 +38,9 @@ git  rebase -i HEAD~3
 
 - `git filter --branch`：指定删除所有提交中的某个文件或者全局修改邮箱地址等操作。
 修改之后objects中的原来的 commit  object没有删除，而是成为了悬空的objet(没有ref指向的object）
-
-
+# git stash
+`git add .`
+暂存文件：`git stash`
+弹出文件：`git stash pop` 
 # 参考资料
 - [rebase 用法小结](https://www.jianshu.com/p/4a8f4af4e803)
