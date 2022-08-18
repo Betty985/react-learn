@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import marked from 'marked'
+import {marked} from 'marked'
 import RedError from "../../components/RedError";
 import ArticleMeta from "./components/ArticleMeta";
 import CommentContainer from "./components/Comment";
@@ -31,7 +31,7 @@ const Article: FC<A> = (props) => {
     const { comments, commentErrors } = commentStore
     const article = articlesStore.getArticle(slug)
     const canModify = currentUser?.username === article.author.name
-    const markup = { __html: marked(article.body, { sanitize: true }) }
+    const markup = { __html: marked.parse(article.body, { sanitize: true }) }
     if (!article) return <RedError message="无法加载文章" />;
     return (
         <div className="article-page">

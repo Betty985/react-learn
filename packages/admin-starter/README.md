@@ -23,6 +23,8 @@ web-vitals库是一个小型 (~1K) 模块化库，用于测量真实用户的所
 - 支持ESM--loader使用
 - 支持--require钩子使用
 - 用于每个扩展自定义的可选配置文件
+# react-router 
+[RouteObject](https://github.com/remix-run/react-router/blob/main/packages/react-router/lib/router.ts#L86-L96)
 # 参考资料
 - [React结合TypeScript和Mobx初体验](https://segmentfault.com/a/1190000015002112)
 - [progressive-web-app](https://create-react-app.dev/docs/making-a-progressive-web-app/)

@@ -30,6 +30,7 @@
     "scss": "^0.2.4"
   },
   "devDependencies": {
+    "@types/marked": "^4.0.5",
     "@types/react-dom": "^18.0.6",
     "tsm": "^2.2.2",
     "typed-scss-modules": "^6.5.0",

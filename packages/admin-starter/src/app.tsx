@@ -1,16 +1,17 @@
 import React, { FC } from "react";
-import { Routes, Route } from "react-router-dom";
+// import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Settings from "./pages/Settings";
 import Test from "./components/ArticleList";
+import {Routes} from './router'
 {/* <PrivateRoute path="/settings" element={<Settings />} /> */}
 const App: FC = () => {
   return (
     <>
       <Header />
-      <Routes>
+      {/* <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Test />} />
         <Route path="/settings" element={<Settings />} />
@@ -23,7 +24,8 @@ const App: FC = () => {
             </main>
           }
         />
-      </Routes>
+      </Routes> */}
+      {Routes}
     </>
   );
 };

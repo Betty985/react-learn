@@ -7,6 +7,7 @@ importers:
       '@babel/core': ^7.0.0-0
       '@babel/plugin-syntax-flow': ^7.14.5
       '@babel/plugin-transform-react-jsx': ^7.14.9
+      '@types/marked': ^4.0.5
       '@types/react': ^18.0.17
       '@types/react-dom': ^18.0.6
       axios: ^0.27.2
@@ -41,6 +42,7 @@ importers:
       react-scripts: 5.0.1_oe3ol62eqh6iphsltbumhvug5m
       scss: 0.2.4
     devDependencies:
+      '@types/marked': 4.0.5
       '@types/react-dom': 18.0.6
       tsm: 2.2.2
       typed-scss-modules: 6.5.0
@@ -2325,6 +2327,10 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+
+  /@types/marked/4.0.5:
+    resolution: {integrity: sha512-jMN2moJ+lSf1VZXQo3VXeMCjoXuciVONig8+U0YNBop5aBvQw4qkolx1Nzn1i0T8L2l9IZ3jju6bS1pPwlaY1w==}
+    dev: true
 
   /@types/mime/3.0.1:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
