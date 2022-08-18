@@ -6,8 +6,8 @@ interface A{
 }
 const CommentInput: FC<A>= (props) => {
     const { commentStore } = useStores()
-    const {isCreatingComment}=commentStore
     const [body, setBody] = useState('')
+    const {isCreatingComment}=commentStore
     const createComment = e => {
         e.preventDefault()
         commentStore.createComment({ body: body }).

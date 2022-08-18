@@ -10,7 +10,6 @@ interface A {
     match: any
 }
 const Article: FC<A> = (props) => {
-    console.log(useStores(), 'artcle 13')
     const { articlesStore, commentStore, userStore } = useStores()
     const navigate = useNavigate()
     const handleDeleteArticle = slug => {

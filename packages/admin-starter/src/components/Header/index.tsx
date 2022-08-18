@@ -72,7 +72,7 @@ const Header: FC = () => {
           {commonStore.appName.toLowerCase()}
         </Link>
         <LoggedOutView currentUser={userStore.currentUser} />
-        <LoggedInView currentUser={userStore.currentUser} />
+        <LoggedInView currentUser={1||userStore.currentUser} />
       </div>
     </nav>
   );

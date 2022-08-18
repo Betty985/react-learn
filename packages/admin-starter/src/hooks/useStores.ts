@@ -1,6 +1,6 @@
 import { MobXProviderContext } from 'mobx-react'
-import React from 'react'
+import {useContext} from 'react'
 function useStores() {
-  return React.useContext(MobXProviderContext)
+  return useContext(MobXProviderContext)
 }
 export default useStores
