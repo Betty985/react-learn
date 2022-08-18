@@ -54,6 +54,14 @@ macOS、Linux 和 Windows
 Git 图形用户界面
 自定义目录
 单仓库
+## commitlint：校验提交信息。
+- `npm install --save-dev @commitlint/config-conventional @commitlint/cli（npm 需要 7.x 以上）`。
+- `echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js`创建 commitlint.config.js 文件。
+
+## commitizen规范化提交代码。git cz代替git commit
+>当您使用 Commitizen 提交时，系统会提示您在提交时填写所有必需的提交字段。无需再等到稍后运行 git commit 挂钩并拒绝您的提交（尽管这仍然会有所帮助）。不再需要通过CONTRIBUTING.md来查找首选格式。获取有关您的提交消息格式的即时反馈，并提示您输入必填字段。
+- `npm install -g commitizen`
+- `npx commitizen init cz-conventional-changelog --save-dev --save-exact`使用npx来初始化传统的变更日志适配器.
 ## prettier
 Prettier 使用 cosmiconfig 进行配置文件支持，这意味着你可以通过(优先顺序) :
 - 在package.json 文件的 "prettier"键.
@@ -98,4 +106,5 @@ development(开发环境) 和 production(生产环境) 这两个环境下的构�
 - [prettier](https://prettier.io/docs/en/configuration.html#docsNav)
 - [ts](https://www.typescriptlang.org/tsconfig#declaration)
 - [webpack](https://webpack.docschina.org/guides/production/#setup)
+- [commitizen](https://www.npmjs.com/package/commitizen?activeTab=readme)
 - [TSConfig 之 include、exclude 和 files 选项](https://juejin.cn/post/6924264635218542605)

@@ -5,19 +5,40 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm  -C packages/my-app run dev"
+    "dev": "npm  -C packages/my-app run dev",
+    "pre": "npm set-script prepare 'husky install'",
+    "prepare": "husky install",
+    "preinstall": "npx only-allow pnpm"
   },
-  "keywords": ["mobx","react"],
+  "keywords": [
+    "mobx",
+    "react"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@babel/cli": "^7.18.10",
-    "husky": "^8.0.1",
     "json5": "^2.2.1",
     "mobx": "^6.6.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "cz-customizable": "^6.9.1",
+    "eslint": "^8.22.0",
+    "husky": "^8.0.1",
     "jest": "^28.1.3",
-    "ts-jest": "^28.0.7"
+    "ts-jest": "^28.0.7",
+    "prettier": "^2.7.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+    }
   }
 }

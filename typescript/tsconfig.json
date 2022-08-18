@@ -1,7 +1,0 @@
-{
-    "compilerOptions": {
-        "target": "ESNext",
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata":true
-    }
-}
