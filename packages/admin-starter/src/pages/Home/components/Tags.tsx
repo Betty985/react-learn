@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "@/components/LoadingSpinner"
-
 interface B {
     tags: any
 }
@@ -30,6 +29,4 @@ const Tags: FC<B> = (props) => {
         return <LoadingSpinner />;
     }
 }
-
-
-export default 1
+export default Tags
