@@ -48,5 +48,27 @@ git  rebase -i HEAD~3
 - `git checkout -b` :基于当前分支，检出一个新的分支，并切换到新分支
 - `git branch -d <branch>` :删除一个分支
 - `git branch --set-upstream-to 远程分支 本地分支`：切换远程分支
+# git 多用户
+```shell
+~$ git config --global user.name "urGitHubUsrName"
+~$ git config --global user.email "urGitHubEmail@foobar.com"
+
+~$ git config --local user.name "urGitHubUsrName"
+~$ git config --local user.email "urGitHubEmail@foobar.com"
+
+~$ git config --worktree user.name "urGitHubUsrName"
+~$ git config --worktree user.email "urGitHubEmail@foobar.com"
+```
+在git中，我们使用git config 命令用来配置git的配置文件，git配置级别主要有以下3类：
+
+1、仓库级别 local 【优先级最高】
+
+2、用户级别 global【优先级次之】
+
+3、系统级别 system【优先级最低】
+
+`git config --list`:查看配置列表
 # 参考资料
 - [rebase 用法小结](https://www.jianshu.com/p/4a8f4af4e803)
+- [ubuntu - 我可以在 vscode 中登录两个不同的 github 帐户吗？ - 探索字符串](https://string.quest/read/16878671)
+- [git config配置](https://www.cnblogs.com/fireporsche/p/9359130.html)
