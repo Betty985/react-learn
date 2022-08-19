@@ -13,7 +13,7 @@ const Article: FC<A> = (props) => {
     const { articlesStore, commentStore, userStore } = useStores()
     const navigate = useNavigate()
     const handleDeleteArticle = slug => {
-        articlesStore.deleteArticle(slug).then(() => navigate('/'))
+        articlesStore.deleteArticle(slug).then(() => navigate('/',{replace:true}))
     }
     const handleDeleteComment = id => {
         commentStore.deleteComment(id)

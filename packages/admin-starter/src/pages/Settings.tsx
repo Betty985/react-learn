@@ -92,7 +92,7 @@ observer(SettingsForm);
 const Settings: FC = () => {
   const { userStore, authStore } = useStores();
   const navigate = useNavigate();
-  const handleClickLogout = () => authStore.logout().then(() => navigate("/"));
+  const handleClickLogout = () => authStore.logout().then(() => navigate("/", { replace: true }));
   return (
     <div className="settings-page">
       <div className="container page">
