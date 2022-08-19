@@ -1,26 +1,35 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { observer, inject } from "mobx-react";
-import { loggedOutArr } from "./route";
+import { observer} from "mobx-react";
 import useStores from "../../hooks/useStores";
 interface LoggedProps {
   currentUser: any;
 }
 
 const LoggedOutView: FC<LoggedProps> = (props) => {
-  if (!props.currentUser) {
-    return (
+  const {currentUser}=props
+  if (!currentUser) {
+    return  (
       <ul className="nav navbar-nav pull-xs-right">
-        {loggedOutArr.map((item) => {
-          const { path, title } = item;
-          return (
-            <li key={title} className="nav-item">
-              <Link to={path} className="nav-link">
-                {title}
-              </Link>
-            </li>
-          );
-        })}
+
+        <li className="nav-item">
+          <Link to="/" className="nav-link">
+            主页
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link to="/login" className="nav-link">
+            登录
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link to="/register" className="nav-link">
+            注册
+          </Link>
+        </li>
+
       </ul>
     );
   }
@@ -28,7 +37,8 @@ const LoggedOutView: FC<LoggedProps> = (props) => {
 };
 
 const LoggedInView: FC<LoggedProps> = (props) => {
-  if (props.currentUser) {
+  const {currentUser}=props
+  if (currentUser) {
     return (
       <ul className="nav navbar-nav pull-xs-right">
         <li className="nav-item">
@@ -52,9 +62,9 @@ const LoggedInView: FC<LoggedProps> = (props) => {
         </li>
 
         <li className="nav-item">
-          <Link to={`/@${props.currentUser}`} className="nav-link">
-            <img src={props.currentUser} className="user-pic" alt="" />
-            {props.currentUser}
+          <Link to={`/@${currentUser}`} className="nav-link">
+            <img src={currentUser} className="user-pic" alt="user-pic" />
+            {currentUser}
           </Link>
         </li>
       </ul>
@@ -72,7 +82,7 @@ const Header: FC = () => {
           {commonStore.appName.toLowerCase()}
         </Link>
         <LoggedOutView currentUser={userStore.currentUser} />
-        <LoggedInView currentUser={1||userStore.currentUser} />
+        <LoggedInView currentUser={userStore.currentUser} />
       </div>
     </nav>
   );

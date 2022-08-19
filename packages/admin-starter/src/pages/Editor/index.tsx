@@ -1,7 +1,16 @@
-import React,{FC} from "react";
-const A:FC=()=>{
+import React, { FC} from "react";
+import EditorForm from "./EditorForm";
+const Editor: FC = () => {
     return (
-        <h1>ooooo</h1>
-    )
+        <div className="editor-page">
+            <div className="container page">
+                <div className="row">
+                    <div className="col-md-10 offset-md-1 col-xs-12">
+                        <EditorForm />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
-export default A
+export default Editor
