@@ -15,8 +15,8 @@ const ListPagination = (props) => {
       <ul className="pagination">
         {range.map((v) => {
           const isCurrent = v === props.currentPage;
-          const onClick = (ev) => {
-            ev.preventDefault();
+          const onClick = (e) => {
+            e.preventDefault();
             props.onSetPage(v);
           };
           return (

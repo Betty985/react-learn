@@ -19,12 +19,12 @@ const EditorForm: FC = () => {
     const changeDescription = e => editorStore.setDescription(e.target.value);
     const changeBody = e => editorStore.setBody(e.target.value);
     const changeTagInput = e => setTagInput(e.target.value);
-    const handleTagInputKeyDown = ev => {
-        switch (ev.keyCode) {
+    const handleTagInputKeyDown = e => {
+        switch (e.keyCode) {
             case 13: // Enter
             case 9: // Tab
             case 188: // ,
-                if (ev.keyCode !== 9) ev.preventDefault();
+                if (e.keyCode !== 9) e.preventDefault();
                 handleAddTag();
                 break;
             default:

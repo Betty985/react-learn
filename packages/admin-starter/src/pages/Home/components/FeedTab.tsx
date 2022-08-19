@@ -33,7 +33,7 @@ const GlobalFeedTab: FC = () => {
                     search: "?tab=all"
                 }}
             >
-                全局提要
+                全部帖子
             </NavLink>
         </li>
     );

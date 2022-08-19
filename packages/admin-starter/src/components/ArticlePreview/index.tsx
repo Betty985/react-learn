@@ -11,8 +11,8 @@ interface A{
 const ArticlePreview: FC<A> = (props) => {
   const { article } = props;
   const { articlesStore } = useStores();
-  const handleClickFavorite = (ev) => {
-    ev.preventDefault();
+  const handleClickFavorite = (e) => {
+    e.preventDefault();
     if (article.favorited) {
       articlesStore.unmakeFavorite(article.slug);
     } else {
