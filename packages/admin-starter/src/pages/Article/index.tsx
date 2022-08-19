@@ -1,16 +1,14 @@
 import React, { FC, useEffect } from "react";
 import { observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {marked} from 'marked'
 import RedError from "../../components/RedError";
 import ArticleMeta from "./components/ArticleMeta";
 import CommentContainer from "./components/Comment";
 import useStores from "../../hooks/useStores";
-interface A {
-    match: any
-}
-const Article: FC<A> = (props) => {
+const Article: FC = () => {
     const { articlesStore, commentStore, userStore } = useStores()
+    const params=useParams()
     const navigate = useNavigate()
     const handleDeleteArticle = slug => {
         articlesStore.deleteArticle(slug).then(() => navigate('/',{replace:true}))
@@ -20,12 +18,12 @@ const Article: FC<A> = (props) => {
     }
     // 初次挂载
     useEffect(() => {
-        const slug = props.match.params.id
+        const slug = params.id
         articlesStore.loadArticle(slug, { acceptCached: true })
         commentStore.setArticleSlug(slug)
         commentStore.loadComments()
     }, [])
-    const slug = props.match.params.id
+    const slug = params.id
     const { currentUser } = userStore
     const { comments, commentErrors } = commentStore
     const article = articlesStore.getArticle(slug)

@@ -37,15 +37,13 @@ const MainView: FC = observer(() => {
     useEffect(() => {
         articlesStore.setPredicate(getPredicate());
         articlesStore.loadArticles()
-    })
+    },[])
     return (
         <div className="col-md-9">
             <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
                     <YourFeedTab currentUser={currentUser} />
-
                     <GlobalFeedTab />
-
                     <TagFilterTab tag={qsParse(location.search).tag} />
                 </ul>
             </div>

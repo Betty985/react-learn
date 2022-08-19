@@ -10,7 +10,7 @@ interface A{
 const PrivateRoute:FC<A>= observer((props) => {
   const { userStore} = useStores();
   const {path,element}=props
-  if (1||userStore.currentUser) 
+  if (userStore.currentUser) 
   return <Route path={path} element={element}/>;
   return <Route path="/" element={<Nothing />} />;
 });

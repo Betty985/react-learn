@@ -15,7 +15,7 @@ const YourFeedTab: FC<A> = props => {
                         search: "?tab=feed"
                     }}
                 >
-                    您的反馈
+                    您的发帖
                 </NavLink>
             </li>
         );

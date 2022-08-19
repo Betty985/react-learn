@@ -6,7 +6,7 @@ interface B {
 }
 const Tags: FC<B> = (props) => {
     const { tags } = props
-    if (tags) {
+    if (tags.length!=0) {
         return (
             <div className="tag-list">
                 {tags.map(tag => {

@@ -5,9 +5,11 @@ const articlesStore = makeAutoObservable({
   isLoading: false,
   page: 0,
   totalPagesCount: 0,
-  articles: [],
   articlesRegistry: observable.map(),
   predicate: {},
+  get articles() {
+    return this.articlesRegistry.values();
+  },
   clear() {
     this.articles = [];
     this.articlesRegistry.clear();
@@ -51,12 +53,13 @@ const articlesStore = makeAutoObservable({
     this.isLoading = true;
     return this.$req()
       .then(
-        action(({ articles, articlesCount }) => {
-            this.articlesRegistry.clear()
-            articles?.forEach((article) =>
-              this.articlesRegistry.set(article.slug, article)
-            )
-            this.totalPagesCount = Math.ceil(articlesCount / LIMIT)
+        action(({ data }) => {
+          const { articles, articlesCount } = data
+          this.articlesRegistry.clear()
+          articles?.forEach((article) =>
+            this.articlesRegistry.set(article.slug, article)
+          )
+          this.totalPagesCount = Math.ceil(articlesCount / LIMIT)
         })
       )
       .finally(
@@ -128,9 +131,6 @@ const articlesStore = makeAutoObservable({
 
   updateArticle(article) {
     agent.articles.update(article).then(({ article }) => {
-      this.articles = this.articles.map((a) =>
-        a.slug === article.slug ? article : a
-      );
       this.articlesRegistry.set(article.slug, article);
       return article;
     });

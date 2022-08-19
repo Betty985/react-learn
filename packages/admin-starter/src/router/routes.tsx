@@ -10,7 +10,7 @@ import Home from '../pages/Home'
 import NotMatch from '../pages/NotMatch'
 import React from 'react'
 const tags = [
-    '登录', 
+    '登录',
     '注册',
     '发帖',
     '文章',
@@ -25,7 +25,7 @@ const routes: RouteObj[] = [
     },
     {
         path: PATH_ARTICLE,
-        element: <Article match={1} />
+        element: <Article />
     },
     {
         path: PATH_SETTINGS,

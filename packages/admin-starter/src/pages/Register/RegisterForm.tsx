@@ -60,7 +60,7 @@ const RegisterForm: FC = observer(() => {
                         type="submit"
                         disabled={inProgress}
                     >
-                        登录
+                       注册
                     </button>
                 </fieldset>
             </form>
