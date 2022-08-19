@@ -17,7 +17,6 @@ const RegisterForm: FC = observer(() => {
     };
     useEffect(() => {
         return () => { 
-            console.log('hhhhh')
             authStore.reset() 
         }
     }, [])

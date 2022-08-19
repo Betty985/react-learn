@@ -21,7 +21,7 @@ const LoginForm: FC = observer(() => {
     };
     useEffect(() => {
         return authStore.reset()
-    })
+    },[])
     return (
         <>
             <ListErrors errors={errors} />
