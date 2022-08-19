@@ -10,7 +10,7 @@ const Login: FC = () => {
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">登录</h1>
               <p className="text-xs-center">
-                <Link to="register">需要一个账号?</Link>
+                <Link to="/register">需要一个账号?</Link>
               </p>
               <LoginForm />
             </div>

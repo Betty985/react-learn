@@ -52,12 +52,11 @@ const articlesStore = makeAutoObservable({
     return this.$req()
       .then(
         action(({ articles, articlesCount }) => {
-          (this.articles = articles),
-            this.articlesRegistry.clear(),
+            this.articlesRegistry.clear()
             articles?.forEach((article) =>
               this.articlesRegistry.set(article.slug, article)
-            ),
-            (this.totalPagesCount = Math.ceil(articlesCount / LIMIT));
+            )
+            this.totalPagesCount = Math.ceil(articlesCount / LIMIT)
         })
       )
       .finally(

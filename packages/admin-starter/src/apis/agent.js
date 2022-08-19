@@ -1,5 +1,7 @@
 import request from "./request";
 import authStore from "../stores/authStore";
+const encode = encodeURIComponent;
+
 const handleErrors = (err) => {
   if (err?.response.status === 401) {
     authStore.logout();
