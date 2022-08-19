@@ -4,13 +4,11 @@ import { observer } from "mobx-react";
 import { YourFeedTab, GlobalFeedTab, TagFilterTab } from './FeedTab'
 import { parse as qsParse } from "query-string";
 import useStores from "@/hooks/useStores";
-interface A{
-    location:any;
-    router:any;
-}
-const MainView: FC<A> = observer((props) => {
-    const { articlesStore, commonStore, userStore } = useStores()
-    const {location,router}=props
+import { useLocation } from "react-router-dom";
+
+const MainView: FC = observer(() => {
+    const { articlesStore, userStore } = useStores()
+    const location = useLocation()
     const { currentUser } = userStore;
     const {
         articles,
@@ -20,36 +18,31 @@ const MainView: FC<A> = observer((props) => {
     } = articlesStore;
 
     const getTab = () => {
-        return qsParse(props.location.search).tab || "all";
+        return qsParse(location.search).tab || "all";
     }
-    const getPredicate = (props) => {
+    const getPredicate = () => {
         switch (getTab()) {
             case "feed":
                 return { myFeed: true };
             case "tag":
-                return { tag: qsParse(props.location.search).tag };
+                return { tag: qsParse(location.search).tag };
             default:
                 return {};
         }
     }
-    const handleTabChange = tab => {
-        if (location.query.tab === tab) return;
-        router.push({ ...location, query: { tab } });
-    };
-
     const handleSetPage = page => {
         articlesStore.setPage(page);
         articlesStore.loadArticles();
     };
     useEffect(() => {
-        articlesStore.setPredicate(getPredicate(props));
+        articlesStore.setPredicate(getPredicate());
         articlesStore.loadArticles()
-    },[props])
+    })
     return (
         <div className="col-md-9">
             <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
-                    <YourFeedTab currentUser={currentUser}  />
+                    <YourFeedTab currentUser={currentUser} />
 
                     <GlobalFeedTab />
 
@@ -67,5 +60,4 @@ const MainView: FC<A> = observer((props) => {
         </div>
     );
 })
-// @withRouter
 export default MainView
