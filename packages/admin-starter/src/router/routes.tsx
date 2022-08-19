@@ -9,6 +9,15 @@ import Editor from '../pages/Editor'
 import Home from '../pages/Home'
 import NotMatch from '../pages/NotMatch'
 import React from 'react'
+const tags = [
+    '登录', 
+    '注册',
+    '发帖',
+    '文章',
+    '设置',
+    '我',
+    '主页'
+]
 const routes: RouteObj[] = [
     {
         path: PATH_LOGIN,

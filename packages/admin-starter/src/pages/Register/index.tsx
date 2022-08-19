@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react";
-import ListErrors from "@/components/ListErrors";
-import useStores from "@/hooks/useStores";
+import ListErrors from "../../components/ListErrors";
+import useStores from "../../hooks/useStores";
 import { observer } from "mobx-react";
 import { Link, useNavigate } from "react-router-dom";
 const RegisterForm: FC = observer(() => {
@@ -12,7 +12,7 @@ const RegisterForm: FC = observer(() => {
     const handlePasswordChange = e => authStore.setPassword(e.target.value);
     const handleSubmitForm = e => {
         e.preventDefault();
-        authStore.register().then(() => navigate("/", { replace: true }));
+        authStore.register().then(() => navigate("/"));
 
     };
     useEffect(() => {

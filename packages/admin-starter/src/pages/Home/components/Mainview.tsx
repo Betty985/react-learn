@@ -1,9 +1,9 @@
-import ArticleList from "@/components/ArticleList";
+import ArticleList from "../../../components/ArticleList";
 import React, { FC, useEffect } from "react";
 import { observer } from "mobx-react";
 import { YourFeedTab, GlobalFeedTab, TagFilterTab } from './FeedTab'
 import { parse as qsParse } from "query-string";
-import useStores from "@/hooks/useStores";
+import useStores from "../../../hooks/useStores";
 import { useLocation } from "react-router-dom";
 
 const MainView: FC = observer(() => {

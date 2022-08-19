@@ -1,27 +1,34 @@
 import ArticlePreview from "../ArticlePreview";
 import ListPagination from "../ListPagination";
 import LoadingSpinner from "../LoadingSpinner";
-import React from "react";
-
-const ArticleList = (props) => {
-  if (props.loading && props.articles.length === 0) {
+import React, { FC } from "react";
+interface A {
+  articles: any;
+  loading: any;
+  totalPagesCount: any;
+  currentPage: any;
+  onSetPage: any;
+}
+const ArticleList: FC<A> = (props) => {
+  const {loading,articles,totalPagesCount,currentPage,onSetPage}=props
+  if (loading && articles?.length === 0) {
     return <LoadingSpinner />;
   }
 
-  if (props.articles.length === 0) {
+  if (articles?.length === 0) {
     return <div className="article-preview">还没有文章~</div>;
   }
 
   return (
     <div>
-      {props.articles.map((article) => {
+      {articles?.map((article) => {
         return <ArticlePreview article={article} key={article.slug} />;
       })}
 
       <ListPagination
-        onSetPage={props.onSetPage}
-        totalPagesCount={props.totalPagesCount}
-        currentPage={props.currentPage}
+        onSetPage={onSetPage}
+        totalPagesCount={totalPagesCount}
+        currentPage={currentPage}
       />
     </div>
   );

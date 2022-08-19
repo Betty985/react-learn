@@ -26,12 +26,12 @@ function guard(
     //找到对应的路由信息，判断有没有权限控制
     const routedetail = searchroutedetail(pathname, routes);
     //没有找到路由，跳转404
-    if (!routedetail) {
-      // return navigate("/404");
-      return false;
-    }
+    // if (!routedetail) {
+    //   // return navigate("/404");
+    //   return false;
+    // }
     //如果需要权限验证
-    if (1||routedetail.auth) {
+    if (0&&routedetail.auth) {
       const token = localStorage.getItem("jwt");
       if (!token) {
         // 在历史堆栈中传递您想要进入的增量。例如，navigate(-1)相当于点击后退按钮。

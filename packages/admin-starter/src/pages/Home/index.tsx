@@ -1,35 +1,41 @@
-import React, { FC } from "react";
-import { Link } from "react-router-dom";
-import LoadingSpinner from "@/components/LoadingSpinner"
+import React, { FC, useEffect } from "react";
+import Banner from './components/Banner';
+import MainView from './components/MainView';
+import Tags from './components/Tags'
+import useStores from "../../hooks/useStores";
 
-interface B {
-    tags: any
-}
-const Tags: FC<B> = (props) => {
-    const { tags } = props
-    if (tags) {
-        return (
-            <div className="tag-list">
-                {tags.map(tag => {
-                    return (
-                        <Link
-                            to={{
-                                pathname: "/",
-                                search: "?tab=tag&tag=" + tag
-                            }}
-                            className="tag-default tag-pill"
-                            key={tag}
-                        >
-                            {tag}
-                        </Link>
-                    );
-                })}
+
+const Home: FC = () => {
+    const { commonStore } = useStores()
+    const { tags, token, appName } = commonStore;
+    useEffect(() => {
+        commonStore.loadTags();
+    })
+    return (
+        <div className="home-page">
+
+            <Banner token={token} appName={appName} />
+
+            <div className="container page">
+                <div className="row">
+                    <MainView />
+                    <div className="col-md-3">
+                        <div className="sidebar">
+
+                            <p>受欢迎的标签</p>
+
+                            <Tags
+                                tags={tags}
+                            />
+
+                        </div>
+                    </div>
+                </div>
             </div>
-        );
-    } else {
-        return <LoadingSpinner />;
-    }
+
+        </div>
+    );
 }
 
 
-export default 1
+export default Home

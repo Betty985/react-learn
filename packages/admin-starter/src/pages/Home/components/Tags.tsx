@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import LoadingSpinner from "@/components/LoadingSpinner"
+import LoadingSpinner from "../../../components/LoadingSpinner"
 interface B {
     tags: any
 }
