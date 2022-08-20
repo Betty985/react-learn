@@ -3,15 +3,16 @@ import ListPagination from "../ListPagination";
 import LoadingSpinner from "../LoadingSpinner";
 import React, { FC } from "react";
 interface A {
-  articles: any;
+  articles: Array<any>;
   loading: any;
   totalPagesCount: any;
   currentPage: any;
   onSetPage: any;
 }
 const ArticleList: FC<A> = (props) => {
-  const {loading,articles,totalPagesCount,currentPage,onSetPage}=props
-  if (loading||articles.length === 0) {
+  const { loading, articles, totalPagesCount, currentPage, onSetPage } = props;
+  console.log(articles);
+  if (loading && articles?.length === 0) {
     return <LoadingSpinner />;
   }
 
@@ -21,9 +22,9 @@ const ArticleList: FC<A> = (props) => {
 
   return (
     <div>
-      {articles?.map((article) => {
-        return <ArticlePreview article={article} key={article.slug} />;
-      })}
+      {articles?.map((article) => (
+        <ArticlePreview article={article} key={article.slug} />
+      ))}
 
       <ListPagination
         onSetPage={onSetPage}

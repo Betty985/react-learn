@@ -8,7 +8,7 @@ const articlesStore = makeAutoObservable({
   articlesRegistry: observable.map(),
   predicate: {},
   get articles() {
-    return this.articlesRegistry.values();
+    return Array.from(this.articlesRegistry.values());
   },
   clear() {
     this.articles = [];
@@ -54,12 +54,12 @@ const articlesStore = makeAutoObservable({
     return this.$req()
       .then(
         action(({ data }) => {
-          const { articles, articlesCount } = data
-          this.articlesRegistry.clear()
+          const { articles, articlesCount } = data;
+          this.articlesRegistry.clear();
           articles?.forEach((article) =>
             this.articlesRegistry.set(article.slug, article)
-          )
-          this.totalPagesCount = Math.ceil(articlesCount / LIMIT)
+          );
+          this.totalPagesCount = Math.ceil(articlesCount / LIMIT);
         })
       )
       .finally(
