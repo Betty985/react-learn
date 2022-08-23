@@ -12,16 +12,17 @@ interface A {
 }
 const CommentContainer: FC<A> = (props) => {
     const { comments, slug, currentUser, onDelete, errors } = props
+    console.log(comments)
     const isLoggin = currentUser
     const input = (<div>
         <ListErrors errors={errors} />
         <CommentInput slug={slug} currentUser={currentUser} />
     </div>)
     const info = (<p>
-        <Link to="/login">登录</Link>
-        &nbsp;或&nbsp;
-        <Link to="/register">注册</Link>
-        &nbsp;来为这篇文章写评论。
+        <Link to="/login">Sign in</Link>
+        &nbsp;or&nbsp;
+        <Link to="/register">sign up</Link>
+        &nbsp;to add comments on this article.
     </p>)
     return (
         <div className="col-xs-12 col-md-8 offset-md-2">

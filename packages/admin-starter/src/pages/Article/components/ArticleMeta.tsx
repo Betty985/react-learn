@@ -31,7 +31,7 @@ interface B{
     onDelete:any;
 }
 const ArticleMeta:FC<B>=observer(props=>{
-    const article = props.article;
+    const {article,canModify} = props;
     return (
       <div className="article-meta">
         <Link to={`/@${article.author.username}`}>
@@ -47,7 +47,7 @@ const ArticleMeta:FC<B>=observer(props=>{
           </span>
         </div>
   
-        <ArticleActions canModify={props.canModify} article={article} onDelete={props.onDelete} />
+        <ArticleActions canModify={canModify} article={article} onDelete={props.onDelete} />
       </div>
     );
   })
