@@ -14,7 +14,7 @@ const Banner: FC<A> = (props) => {
                 <h1 className="logo-font">
                     {appName.toLowerCase()}
                 </h1>
-                <p>一个分享你的知识的地方。</p>
+                <p>A place to share your knowledge.</p>
             </div>
         </div>
     )

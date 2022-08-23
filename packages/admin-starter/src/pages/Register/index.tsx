@@ -7,9 +7,9 @@ const Register: FC = () => {
             <div className="container page">
                 <div className="row">
                     <div className="col-md-6 offset-md-3 col-xs-12">
-                        <h1 className="text-xs-center">注册</h1>
+                        <h1 className="text-xs-center">Sign Up</h1>
                         <p className="text-xs-center">
-                            <Link to="/login">有账号?</Link>
+                            <Link to="/login">Have an account?</Link>
                         </p>
                         <RegisterForm />
                     </div>

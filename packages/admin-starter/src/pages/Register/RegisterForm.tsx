@@ -29,7 +29,7 @@ const RegisterForm: FC = observer(() => {
                         <input
                             className="form-control form-control-lg"
                             type="text"
-                            placeholder="用户名"
+                            placeholder="Your Name"
                             value={values.username}
                             onChange={handleUsernameChange}
                         />
@@ -39,7 +39,7 @@ const RegisterForm: FC = observer(() => {
                         <input
                             className="form-control form-control-lg"
                             type="email"
-                            placeholder="邮箱"
+                            placeholder="Email"
                             value={values.email}
                             onChange={handleEmailChange}
                         />
@@ -49,7 +49,7 @@ const RegisterForm: FC = observer(() => {
                         <input
                             className="form-control form-control-lg"
                             type="password"
-                            placeholder="密码"
+                            placeholder="Password"
                             value={values.password}
                             onChange={handlePasswordChange}
                         />
@@ -60,7 +60,7 @@ const RegisterForm: FC = observer(() => {
                         type="submit"
                         disabled={inProgress}
                     >
-                       注册
+                       Sign Up
                     </button>
                 </fieldset>
             </form>

@@ -9,17 +9,10 @@ const UserStore = makeAutoObservable({
     this.loadingUser = true;
     return auth
       .current()
-      .then(
-        action((props) => {
-          const { user } = props;
-          this.currentUser = user;
-        })
-      )
-      .finally(
-        action(() => {
-          this.loadingUser = false;
-        })
-      );
+      .then(action(({ user }) => { 
+        console.log(user)
+        this.currentUser = user; }))
+      .finally(action(() => { this.loadingUser = false; }))
   },
   updateUser(newUser) {
     this.updatingUser = true;

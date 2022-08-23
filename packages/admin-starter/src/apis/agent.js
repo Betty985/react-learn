@@ -1,21 +1,14 @@
 import request from "./request";
-import authStore from "../stores/authStore";
 const encode = encodeURIComponent;
 
-const handleErrors = (err) => {
-  if (err?.response.status === 401) {
-    authStore.logout();
-  }
-  return err;
-};
-const responseBody = (res) => res.body;
 const auth = {
   current: () => request.get("/user"),
   login: (email, password) =>
-    request.post("/user/login", { user: { email, password } }),
+    request.post("/users/login", { user: { email, password } }),
   register: (username, email, password) =>
     request.post("/users", { user: { username, email, password } }),
-  save: (user) => request.put("/user", { user }),
+  save: (user) => {
+    return request.put("/user", { user })},
 };
 const tags = {
   getAll: () => request.get("/tags"),

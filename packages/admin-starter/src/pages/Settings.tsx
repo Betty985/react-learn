@@ -82,7 +82,7 @@ const SettingsForm: FC<A> = (props) => {
           type="submit"
           disabled={userStore.updatingUser}
         >
-          更新设置
+           Update Settings
         </button>
       </fieldset>
     </form>
@@ -98,7 +98,7 @@ const Settings: FC = () => {
       <div className="container page">
         <div className="row">
           <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">我</h1>
+            <h1 className="text-xs-center">Your Settings</h1>
             <ListErrors errors={userStore.updatingUserErrors} />
             <SettingsForm
               currentUser={userStore.currentUser}
@@ -109,7 +109,7 @@ const Settings: FC = () => {
               className="btn btn-outline-danger"
               onClick={handleClickLogout}
             >
-              退出
+              Or click here to logout.
             </button>
           </div>
         </div>

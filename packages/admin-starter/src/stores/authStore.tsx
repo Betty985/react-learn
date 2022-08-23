@@ -29,45 +29,45 @@ const authStore = makeAutoObservable({
     this.errors = undefined;
     return agent.auth.login(this.values.email, this.values.password)
       .then(({ user }) => commonStore.setToken(user.token))
-      .then(() => userStore.pullUser())
-      .catch(
-        action((err) => {
-          this.errors = err?.response?.body?.errors;
-          throw err;
-        })
-      )
-      .finally(
-        action(() => {
-          this.inProgress = false;
-        })
-      );
+  .then(() => userStore.pullUser())
+  .catch(
+    action((err) => {
+      this.errors = err?.response?.body?.errors;
+      throw err;
+    })
+  )
+  .finally(
+    action(() => {
+      this.inProgress = false;
+    })
+  );
   },
-  register() {
-    this.inProgress = true;
-    this.errors = undefined;
-    return agent.auth.register(
-      this.values.username,
-      this.values.email,
-      this.values.password
+register() {
+  this.inProgress = true;
+  this.errors = undefined;
+  return agent.auth.register(
+    this.values.username,
+    this.values.email,
+    this.values.password
+  )
+    .then(({ user }) => commonStore.setToken(user.token))
+    .then(() => userStore.pullUser())
+    .catch(
+      action((err) => {
+        this.errors = err?.response?.body?.errors;
+        throw err;
+      })
     )
-      .then(({ user }) => commonStore.setToken(user.token))
-      .then(() => userStore.pullUser())
-      .catch(
-        action((err) => {
-          this.errors = err?.response?.body?.errors;
-          throw err;
-        })
-      )
-      .finally(
-        action(() => {
-          this.inProgress = false;
-        })
-      );
-  },
-  logout() {
-    commonStore.setToken(undefined);
-    userStore.forgetUser();
-    return Promise.resolve()
-  },
+    .finally(
+      action(() => {
+        this.inProgress = false;
+      })
+    );
+},
+logout() {
+  commonStore.setToken(undefined);
+  userStore.forgetUser();
+  return Promise.resolve()
+},
 });
 export default authStore;

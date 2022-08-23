@@ -15,7 +15,7 @@ const YourFeedTab: FC<A> = props => {
                         search: "?tab=feed"
                     }}
                 >
-                    您的发帖
+                  Your Feed
                 </NavLink>
             </li>
         );
@@ -33,7 +33,7 @@ const GlobalFeedTab: FC = () => {
                     search: "?tab=all"
                 }}
             >
-                全部帖子
+                Global Feed
             </NavLink>
         </li>
     );

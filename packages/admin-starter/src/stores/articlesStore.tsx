@@ -53,7 +53,7 @@ const articlesStore = makeAutoObservable({
     this.isLoading = true;
     return this.$req()
       .then(
-        action(({ articles, articlesCount } ) => {
+        action(({ articles, articlesCount }) => {
           this.articlesRegistry.clear();
           articles?.forEach((article) =>
             this.articlesRegistry.set(article.slug, article)

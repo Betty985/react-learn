@@ -35,7 +35,7 @@ const MainView: FC = observer(() => {
         articlesStore.loadArticles();
     };
     useEffect(() => {
-        articlesStore.setPredicate(getPredicate());
+        articlesStore.setPredicate(getPredicate())
         articlesStore.loadArticles()
     },[])
     return (

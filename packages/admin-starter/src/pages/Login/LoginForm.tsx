@@ -32,7 +32,7 @@ const LoginForm: FC = observer(() => {
                         <input
                             className="form-control form-control-lg"
                             type="email"
-                            placeholder="邮箱"
+                            placeholder="Email"
                             value={values.email}
                             onChange={handleEmailChange}
                         />
@@ -42,7 +42,7 @@ const LoginForm: FC = observer(() => {
                         <input
                             className="form-control form-control-lg"
                             type="password"
-                            placeholder="密码"
+                            placeholder="Password"
                             value={values.password}
                             onChange={handlePasswordChange}
                         />
@@ -53,7 +53,7 @@ const LoginForm: FC = observer(() => {
                         type="submit"
                         disabled={inProgress}
                     >
-                        登录
+                        Sign In
                     </button>
                 </fieldset>
             </form>
