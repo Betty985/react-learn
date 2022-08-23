@@ -5,7 +5,7 @@ import useStores from "../../hooks/useStores";
 const Container: FC = () => {
   const { profileStore, articlesStore } = useStores();
   const { profile } = profileStore;
-  const { articles, totalPagesCount, isLoading } = articlesStore;
+  const { articles, totalPagesCount, isLoading ,page} = articlesStore;
   const handleSetPage = (page) => {
     articlesStore.setPage(page);
     articlesStore.loadArticles();
@@ -27,18 +27,19 @@ const Container: FC = () => {
                   className="nav-link"
                   to={`/@${profile.username}/favorites`}
                 >
-                  点赞的文章1
+                  点赞的文章
                 </NavLink>
               </li>
             </ul>
           </div>
-          {/* 
+          
           <ArticleList
             articles={articles}
             totalPagesCount={totalPagesCount}
             onSetPage={handleSetPage}
             loading={isLoading}
-          /> */}
+            currentPage={page}
+          />
         </div>
       </div>
     </div>

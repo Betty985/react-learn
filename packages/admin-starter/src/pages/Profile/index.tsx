@@ -1,7 +1,12 @@
 import React,{FC} from "react";
-const A:FC=()=>{
+import Container from "./Container";
+import ProfilePage from "./ProfilePage";
+const Profile:FC=()=>{
     return (
-        <h1>ooooo</h1>
+        <>
+        <ProfilePage />
+        <Container />
+        </>
     )
 }
-export default A
+export default Profile
