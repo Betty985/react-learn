@@ -1,32 +1,38 @@
-import React, { FC } from "react";
+import React, { FC, memo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../../../components/LoadingSpinner"
-interface B {
-    tags: any
-}
-const Tags: FC<B> = (props) => {
-    const { tags } = props
-    if (tags.length!=0) {
-        return (
-            <div className="tag-list">
-                {tags.map(tag => {
-                    return (
-                        <Link
-                            to={{
-                                pathname: "/",
-                                search: "?tab=tag&tag=" + tag
-                            }}
-                            className="tag-default tag-pill"
-                            key={tag}
-                        >
-                            {tag}
-                        </Link>
-                    );
-                })}
+import useStores from "../../../hooks/useStores";
+
+const Tags: FC = () => {
+    const { commonStore } = useStores();
+    useEffect(() => {
+        commonStore.loadTags();
+    }, [])
+    const { tags, isLoadingTags } = commonStore
+
+    console.log(tags)
+    return (
+        <div className="col-md-3">
+            <div className="sidebar">
+                <p>Popular Tags</p>
+                <div className="tag-list">
+                    {isLoadingTags && tags.length == 0 ? <LoadingSpinner />
+                        : tags.map(tag =>
+                            <Link
+                                to={{
+                                    pathname: "/",
+                                    search: "?tab=tag&tag=" + tag
+                                }}
+                                className="tag-default tag-pill"
+                                key={tag}
+                            >
+                                {tag}
+                            </Link>
+                        )}
+                </div>
             </div>
-        );
-    } else {
-        return <LoadingSpinner />;
-    }
+        </div>
+    );
 }
-export default Tags
+
+export default memo(Tags)

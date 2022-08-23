@@ -24,6 +24,7 @@ const articlesStore = makeAutoObservable({
     this.page = page;
   },
   setPredicate(predicate) {
+    console.log('predicate',predicate)
     if (JSON.stringify(predicate) === JSON.stringify(this.predicate)) return;
     this.clear();
     this.predicate = predicate;

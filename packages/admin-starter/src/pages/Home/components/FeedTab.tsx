@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 interface A {
     currentUser: any
 }
@@ -15,7 +15,7 @@ const YourFeedTab: FC<A> = props => {
                         search: "?tab=feed"
                     }}
                 >
-                  Your Feed
+                    Your Feed
                 </NavLink>
             </li>
         );
@@ -24,10 +24,15 @@ const YourFeedTab: FC<A> = props => {
 };
 
 const GlobalFeedTab: FC = () => {
+    const location = useLocation()
     return (
         <li className="nav-item">
             <NavLink
-                className="nav-link"
+                className={({ isActive }) => {
+                    isActive = location.search.match(/tab=(feed|tag)/) ? false : true
+                    return isActive ? 'nav-link active' : 'nav-link'
+                }
+                }
                 to={{
                     pathname: "/",
                     search: "?tab=all"
@@ -51,4 +56,4 @@ const TagFilterTab: FC<B> = props => {
         </li>
     );
 };
-export {YourFeedTab,GlobalFeedTab,TagFilterTab}
+export { YourFeedTab, GlobalFeedTab, TagFilterTab }

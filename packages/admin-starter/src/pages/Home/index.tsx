@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useMemo } from "react";
 import Banner from "./components/Banner";
 import MainView from "./components/MainView";
 import Tags from "./components/Tags";
@@ -6,22 +6,19 @@ import useStores from "../../hooks/useStores";
 
 const Home: FC = () => {
   const { commonStore } = useStores();
-  const { tags,token, appName } = commonStore;
-  useEffect(() => {
+  const { token, appName } = commonStore;
+  const tags = useMemo(() => {
     commonStore.loadTags();
-  },[]);
+    return commonStore.tags
+  }, [commonStore]);
+  console.log(tags)
   return (
     <div className="home-page">
       <Banner token={token} appName={appName} />
       <div className="container page">
         <div className="row">
           <MainView />
-          <div className="col-md-3">
-            <div className="sidebar">
-              <p>Popular Tags</p>
-              <Tags tags={tags} />
-            </div>
-          </div>
+          <Tags />
         </div>
       </div>
     </div>
