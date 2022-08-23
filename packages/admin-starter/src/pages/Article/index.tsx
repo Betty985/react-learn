@@ -7,25 +7,25 @@ import ArticleMeta from "./components/ArticleMeta";
 import CommentContainer from "./components/Comment";
 import useStores from "../../hooks/useStores";
 const Article: FC = () => {
-    const { articlesStore, commentStore, userStore } = useStores()
+    const { articlesStore, commentsStore, userStore } = useStores()
     const params=useParams()
     const navigate = useNavigate()
     const handleDeleteArticle = slug => {
         articlesStore.deleteArticle(slug).then(() => navigate('/',{replace:true}))
     }
     const handleDeleteComment = id => {
-        commentStore.deleteComment(id)
+        commentsStore.deleteComment(id)
     }
     // 初次挂载
     useEffect(() => {
         const slug = params.id
         articlesStore.loadArticle(slug, { acceptCached: true })
-        commentStore.setArticleSlug(slug)
-        commentStore.loadComments()
+        commentsStore.setArticleSlug(slug)
+        commentsStore.loadComments()
     }, [])
     const slug = params.id
     const { currentUser } = userStore
-    const { comments, commentErrors } = commentStore
+    const { comments, commentErrors } = commentsStore
     const article = articlesStore.getArticle(slug)
     const canModify = currentUser?.username === article.author.name
     const markup = { __html: marked.parse(article.body, { sanitize: true }) }

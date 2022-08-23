@@ -1,15 +1,15 @@
 import React, { FC, useEffect } from "react";
 import Banner from "./components/Banner";
-import MainView from "./components/Mainview";
+import MainView from "./components/MainView";
 import Tags from "./components/Tags";
 import useStores from "../../hooks/useStores";
 
 const Home: FC = () => {
   const { commonStore } = useStores();
-  const { tags, token, appName } = commonStore;
+  const { token, appName } = commonStore;
   useEffect(() => {
     commonStore.loadTags();
-  });
+  },[]);
   return (
     <div className="home-page">
       <Banner token={token} appName={appName} />
@@ -20,8 +20,7 @@ const Home: FC = () => {
           <div className="col-md-3">
             <div className="sidebar">
               <p>受欢迎的标签</p>
-
-              <Tags tags={tags} />
+              <Tags tags={commonStore.tags} />
             </div>
           </div>
         </div>

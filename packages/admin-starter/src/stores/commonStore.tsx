@@ -21,7 +21,11 @@ class CommonStore {
 
   @action loadTags() {
     this.isLoadingTags = true;
-    return agent.tags.getAll();
+    return agent.tags.getAll()
+      .then(action(({ tags }) => {
+         this.tags = tags.map(t => t.toLowerCase()); 
+        }))
+      .finally(action(() => { this.isLoadingTags = false; }))
   }
   @action setToken(token) {
     this.token = token;

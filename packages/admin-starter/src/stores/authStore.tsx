@@ -32,7 +32,7 @@ const authStore = makeAutoObservable({
       .then(() => userStore.pullUser())
       .catch(
         action((err) => {
-          this.errors = err?.response?.body.errors;
+          this.errors = err?.response?.body?.errors;
           throw err;
         })
       )
@@ -54,7 +54,7 @@ const authStore = makeAutoObservable({
       .then(() => userStore.pullUser())
       .catch(
         action((err) => {
-          this.errors = err?.response?.body.errors;
+          this.errors = err?.response?.body?.errors;
           throw err;
         })
       )
