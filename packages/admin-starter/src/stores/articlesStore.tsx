@@ -11,7 +11,6 @@ const articlesStore = makeAutoObservable({
     return Array.from(this.articlesRegistry.values());
   },
   clear() {
-    this.articles = [];
     this.articlesRegistry.clear();
     this.page = 0;
   },
@@ -24,7 +23,6 @@ const articlesStore = makeAutoObservable({
     this.page = page;
   },
   setPredicate(predicate) {
-    console.log('predicate',predicate)
     if (JSON.stringify(predicate) === JSON.stringify(this.predicate)) return;
     this.clear();
     this.predicate = predicate;

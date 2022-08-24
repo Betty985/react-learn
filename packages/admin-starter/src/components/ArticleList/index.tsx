@@ -11,7 +11,7 @@ interface A {
 }
 const ArticleList: FC<A> = (props) => {
   const { loading, articles, totalPagesCount, currentPage, onSetPage } = props;
-  if (loading && articles?.length === 0) {
+  if (loading) {
     return <LoadingSpinner />;
   }
 

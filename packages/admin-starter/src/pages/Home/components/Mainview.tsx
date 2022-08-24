@@ -1,5 +1,5 @@
 import ArticleList from "../../../components/ArticleList";
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import { YourFeedTab, GlobalFeedTab, TagFilterTab } from './FeedTab'
 import { parse as qsParse } from "query-string";
@@ -9,27 +9,41 @@ import { useLocation } from "react-router-dom";
 const MainView: FC = observer(() => {
     const { articlesStore, userStore } = useStores()
     const location = useLocation()
-    const tabRef = useRef("all")
-    const tagRef = useRef(qsParse(location.search).tag)
-    const { currentUser } = userStore;
+    const { currentUser } = userStore
+    const [articles, setArticles] = useState([])
+    const [isLoading, setLoading] = useState(true)
+    const [state,setState]=useState({})
     const {
-        articles,
-        isLoading,
         page,
         totalPagesCount
     } = articlesStore;
+    useEffect(()=>{
+        articlesStore.setPredicate(getPredicate())
+        articlesStore.loadArticles().then(() => {
+            setArticles(articlesStore.articles)
+            setLoading(articlesStore.isLoading)
+        })
+    },[])
+    useEffect(() => {
+        if(JSON.stringify(state)!=JSON.stringify(getPredicate())){
+            setState(getPredicate())
+            setLoading(true)
+            articlesStore.setPredicate(getPredicate())
+            articlesStore.loadArticles().then(() => {
+                setArticles(articlesStore.articles)
+                setLoading(articlesStore.isLoading)
+            })
+        }
+    })
 
     const getPredicate = () => {
-        tabRef.current = qsParse(location.search).tab as string || "all";
-        switch (tabRef.current) {
+        const tab = qsParse(location.search).tab as string || "all";
+        switch (tab) {
             case "feed":
                 return { myFeed: true };
             case "tag":
-                {
-                    tagRef.current = qsParse(location.search).tag
-                    return {
-                        tag: tagRef.current
-                    }
+                return {
+                    tag: qsParse(location.search).tag
                 };
             default:
                 return {};
@@ -39,14 +53,6 @@ const MainView: FC = observer(() => {
         articlesStore.setPage(page);
         articlesStore.loadArticles();
     };
-    useEffect(() => {
-        console.log(1, getPredicate())
-        articlesStore.setPredicate(getPredicate())
-        articlesStore.loadArticles()
-    }, [tagRef.current])
-    useEffect(() => {
-       console.log(getPredicate(),tagRef.current) 
-    })
     return (
         <div className="col-md-9">
             <div className="feed-toggle">
@@ -56,7 +62,6 @@ const MainView: FC = observer(() => {
                     <TagFilterTab tag={qsParse(location.search).tag} />
                 </ul>
             </div>
-
             <ArticleList
                 articles={articles}
                 loading={isLoading}

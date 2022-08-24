@@ -23,7 +23,7 @@ class CommonStore {
     this.isLoadingTags = true;
     return agent.tags.getAll()
       .then(action(({ tags }) => {
-         this.tags = tags.map(t => t.toLowerCase()); 
+         this.tags = tags; 
         }))
       .finally(action(() => { this.isLoadingTags = false; }))
   }
