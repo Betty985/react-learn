@@ -8,10 +8,11 @@ interface A {
     comments: any;
     slug: any;
     onDelete: any;
-    errors: any
+    errors: any;
+    isLoading:boolean;
 }
 const CommentContainer: FC<A> = (props) => {
-    const { comments, slug, currentUser, onDelete, errors } = props
+    const { comments, slug, currentUser, onDelete, errors ,isLoading} = props
     console.log(comments)
     const isLoggin = currentUser
     const input = (<div>
@@ -28,6 +29,9 @@ const CommentContainer: FC<A> = (props) => {
         <div className="col-xs-12 col-md-8 offset-md-2">
             {
                 isLoggin ? input : info
+            }
+            {
+                isLoading&&<p>loading ...</p>
             }
             <CommentList
                 comments={comments}

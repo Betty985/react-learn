@@ -1,16 +1,18 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {marked} from 'marked'
+import { marked } from 'marked'
 import RedError from "../../components/RedError";
 import ArticleMeta from "./components/ArticleMeta";
 import CommentContainer from "./components/Comment";
 import useStores from "../../hooks/useStores";
 const Article: FC = () => {
     const { articlesStore, commentsStore, userStore } = useStores()
-    const params=useParams()
+    const params = useParams()
     const navigate = useNavigate()
+    const [comments, setComments] = useState([])
+    const [isLoading, setLoading] = useState(true)
     const handleDeleteArticle = slug => {
-        articlesStore.deleteArticle(slug).then(() => navigate('/',{replace:true}))
+        articlesStore.deleteArticle(slug).then(() => navigate('/', { replace: true }))
     }
     const handleDeleteComment = id => {
         commentsStore.deleteComment(id)
@@ -20,11 +22,15 @@ const Article: FC = () => {
         const slug = params.id
         articlesStore.loadArticle(slug, { acceptCached: true })
         commentsStore.setArticleSlug(slug)
-        commentsStore.loadComments()
+        commentsStore.loadComments().then(() => {
+            setComments(commentsStore.comments)
+            setLoading(false)
+        })
+
     }, [])
     const slug = params.id
     const { currentUser } = userStore
-    const { comments, commentErrors } = commentsStore
+    const { commentErrors } = commentsStore
     const article = articlesStore.getArticle(slug)
     const canModify = currentUser?.username === article.author.username
     const markup = { __html: marked.parse(article.body, { sanitize: true }) }
@@ -63,6 +69,7 @@ const Article: FC = () => {
                     slug={slug}
                     currentUser={currentUser}
                     onDelete={handleDeleteComment}
+                    isLoading={isLoading}
                 />
             </div>
         </div>

@@ -1,6 +1,5 @@
 import { makeAutoObservable, action } from "mobx";
 import * as agent from "../apis/agent";
-const LIMIT = 10;
 const commentsStore = makeAutoObservable({
   isCreatingComment: false,
   isLoadingComments: false,

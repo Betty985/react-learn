@@ -26,7 +26,6 @@ interface B{
 }
 const Comment:FC<B> = props => {
    const {comment,currentUser,onDelete,slug}=props
-   console.log('comment.tsx slug',slug)
   const show = currentUser?.username === comment.author.username;
   return (
     <div className="card">
