@@ -4,12 +4,15 @@ import React from "react";
 import { Provider } from "mobx-react";
 import App from "./app";
 import stores from "./stores";
+import ErrorBoundary from "./components/ErrorBoundary";
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-  <Provider {...stores}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>
+  <ErrorBoundary>
+    <Provider {...stores}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </ErrorBoundary>
 );

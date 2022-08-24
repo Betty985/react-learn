@@ -13,7 +13,6 @@ interface A {
 }
 const CommentContainer: FC<A> = (props) => {
     const { comments, slug, currentUser, onDelete, errors ,isLoading} = props
-    console.log(comments)
     const isLoggin = currentUser
     const input = (<div>
         <ListErrors errors={errors} />
