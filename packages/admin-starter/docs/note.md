@@ -1,9 +1,10 @@
 React + MobX + TypeScript + React-router
 # todo
 - [x] scss声明文件
-- [ ] 路由守卫
+- [x] 路由守卫
 - [ ] 页面
-- [ ] husky
+- [x] husky
+- [ ] react_devtools_backend.js:4026 marked(): sanitize and sanitizer parameters are deprecated since version 0.7.0, should not be used and will be removed in the future. Read more here: https://marked.js.org/#/USING_ADVANCED.md#options 
 # bug
 ## 无法使用 JSX，除非提供了 "--jsx" 标志。ts(17004)
 重启编译器
