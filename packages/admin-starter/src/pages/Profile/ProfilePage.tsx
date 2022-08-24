@@ -1,23 +1,38 @@
 import useStores from "../../hooks/useStores";
-import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import React, { FC, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 const classes = "btn btn-sm action-btn";
 const followingClasses = classes + " btn-secondary";
 const unfollowingClasses = classes + "  btn-outline-secondary";
 const ProfilePage: FC = () => {
     const { profileStore, userStore } = useStores()
-    const { profile, following, username, unfollow, follow } = profileStore;
+    const [profile,setProfile]=useState({
+        username:undefined,
+        following:undefined,
+        unfollow:undefined,
+        follow:undefined,
+        image:undefined,
+        bio:undefined
+    }) ;
     const { currentUser } = userStore;
-    const isUser = currentUser && profile.username === currentUser.username;
-    const btnClasses = following ? followingClasses : unfollowingClasses
+    const params=useParams()
+    useEffect(()=>{
+        profileStore.loadProfile(params.username).then(()=>{
+            setProfile(profileStore.profile)
+        }
+        )
+    },[])
+    const isUser = currentUser && profile?.username === currentUser.username;
+    const btnClasses = profile?.following ? followingClasses : unfollowingClasses
     const handleClick = e => {
         e.preventDefault();
-        if (following) {
-            unfollow(username);
+        if (profile.following) {
+            profileStore.unfollow(params.username);
         } else {
-            follow(username);
+            profileStore.follow(params.username);
         }
     };
+
     return (
         <div className="profile-page">
             <div className="user-info">
@@ -33,12 +48,12 @@ const ProfilePage: FC = () => {
                                     to="/settings"
                                     className="btn btn-sm btn-outline-secondary action-btn"
                                 >
-                                    <i className="ion-gear-a" /> 编辑主页设置
+                                    <i className="ion-gear-a" /> Edit Profile Settings
                                 </Link>
                             ) : (<button className={btnClasses} onClick={handleClick}>
                                 <i className="ion-plus-round" />
                                 &nbsp;
-                                {following ? "取关" : "关注"} {username}
+                                {profile.following ? "Unfollow" : "Follow"} {params.username}
                             </button>)}
                         </div>
                     </div>

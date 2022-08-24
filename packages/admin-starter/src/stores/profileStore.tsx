@@ -1,17 +1,14 @@
 import { action, makeAutoObservable } from "mobx";
-import ArticlesStore from "./articlesStore";
-import { profile } from "../apis/agent";
+import * as agent from "../apis/agent";
 const profileStore = makeAutoObservable({
   profile: undefined,
   isLoadingProfile: false,
-  ArticlesStore,
   loadProfile(username) {
     this.isLoadingProfile = true;
-    profile
+    return agent.profile
       .get(username)
       .then(
-        action((props) => {
-          const { profile } = props;
+        action(({profile}) => {
           this.profile = profile;
         })
       )
@@ -22,9 +19,9 @@ const profileStore = makeAutoObservable({
       );
   },
   follow() {
-    if (!this.profile?.following) {
+    if (this.profile&&!this.profile?.following) {
       this.profile.following = true;
-      profile.follow(this.profile.username).catch(
+      agent.profile.follow(this.profile.username).catch(
         action(() => {
           this.profile.following = false;
         })
@@ -34,7 +31,7 @@ const profileStore = makeAutoObservable({
   unfollow() {
     if (this.profile?.following) {
       this.profile.following = false;
-      profile.unfollow(this.profile.username).catch(
+      agent.profile.unfollow(this.profile.username).catch(
         action(() => {
           this.profile.following = true;
         })

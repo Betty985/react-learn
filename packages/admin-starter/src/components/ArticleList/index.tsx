@@ -16,7 +16,7 @@ const ArticleList: FC<A> = (props) => {
   }
 
   if (articles?.length === 0) {
-    return <div className="article-preview">还没有文章~</div>;
+    return <div className="article-preview">No articles are here... yet.</div>;
   }
 
   return (

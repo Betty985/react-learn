@@ -33,7 +33,7 @@ const Article: FC = () => {
     const { commentErrors } = commentsStore
     const article = articlesStore.getArticle(slug)
     const canModify = currentUser?.username === article.author.username
-    const markup = { __html: marked.parse(article.body, { sanitize: true }) }
+    const markup = { __html: marked.parse(article.body) }
     if (!article) return <RedError message="无法加载文章" />;
     return (
         <div className="article-page">
