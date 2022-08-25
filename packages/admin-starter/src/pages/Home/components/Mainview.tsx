@@ -5,50 +5,17 @@ import { YourFeedTab, GlobalFeedTab, TagFilterTab } from './FeedTab'
 import { parse as qsParse } from "query-string";
 import useStores from "../../../hooks/useStores";
 import { useLocation } from "react-router-dom";
-
+import useArticles from "../../../hooks/useArticles";
+import { Caller } from "../../../typings";
 const MainView: FC = observer(() => {
     const { articlesStore, userStore } = useStores()
     const location = useLocation()
+    const {articles,isLoading}=useArticles(Caller.HOME)
     const { currentUser } = userStore
-    const [articles, setArticles] = useState([])
-    const [isLoading, setLoading] = useState(true)
-    const [state,setState]=useState({})
     const {
         page,
         totalPagesCount
     } = articlesStore;
-    useEffect(()=>{
-        articlesStore.setPredicate(getPredicate())
-        articlesStore.loadArticles().then(() => {
-            setArticles(articlesStore.articles)
-            setLoading(articlesStore.isLoading)
-        })
-    },[])
-    useEffect(() => {
-        if(JSON.stringify(state)!=JSON.stringify(getPredicate())){
-            setState(getPredicate())
-            setLoading(true)
-            articlesStore.setPredicate(getPredicate())
-            articlesStore.loadArticles().then(() => {
-                setArticles(articlesStore.articles)
-                setLoading(articlesStore.isLoading)
-            })
-        }
-    })
-
-    const getPredicate = () => {
-        const tab = qsParse(location.search).tab as string || "all";
-        switch (tab) {
-            case "feed":
-                return { myFeed: true };
-            case "tag":
-                return {
-                    tag: qsParse(location.search).tag
-                };
-            default:
-                return {};
-        }
-    }
     const handleSetPage = page => {
         articlesStore.setPage(page);
         articlesStore.loadArticles();

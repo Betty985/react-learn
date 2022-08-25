@@ -20,7 +20,7 @@ const ArticleList: FC<A> = (props) => {
   }
 
   return (
-    <div>
+    <div >
       {articles?.map((article) => (
         <ArticlePreview article={article} key={article.slug} />
       ))}
