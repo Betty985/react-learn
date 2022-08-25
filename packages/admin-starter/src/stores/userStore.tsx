@@ -10,7 +10,6 @@ const UserStore = makeAutoObservable({
     return auth
       .current()
       .then(action(({ user }) => { 
-        console.log('useStore',user)
         this.currentUser = user; }))
       .finally(action(() => { this.loadingUser = false; }))
   },

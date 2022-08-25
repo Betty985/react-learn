@@ -41,33 +41,36 @@ const LoggedInView: FC<LoggedProps> = (props) => {
   if (currentUser) {
     return (
       <ul className="nav navbar-nav pull-xs-right">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
 
-        <li className="nav-item">
-          <Link to="/editor" className="nav-link">
-            <i className="ion-compose" />
-            &nbsp;New Article
-          </Link>
-        </li>
+      <li className="nav-item">
+        <Link to="/" className="nav-link">
+          Home
+        </Link>
+      </li>
 
-        <li className="nav-item">
-          <Link to="/settings" className="nav-link">
-            <i className="ion-gear-a" />
-            &nbsp;Settings
-          </Link>
-        </li>
+      <li className="nav-item">
+        <Link to="/editor" className="nav-link">
+          <i className="ion-compose" />&nbsp;New Post
+        </Link>
+      </li>
 
-        <li className="nav-item">
-          <Link to={`/@${currentUser}`} className="nav-link">
-            <img src={currentUser} className="user-pic" alt="user-pic" />
-            {currentUser}
-          </Link>
-        </li>
-      </ul>
+      <li className="nav-item">
+        <Link to="/settings" className="nav-link">
+          <i className="ion-gear-a" />&nbsp;Settings
+        </Link>
+      </li>
+
+      <li className="nav-item">
+        <Link
+          to={`/@${props.currentUser.username}`}
+          className="nav-link"
+        >
+          <img src={props.currentUser.image} className="user-pic" alt="" />
+          {props.currentUser.username}
+        </Link>
+      </li>
+
+    </ul>
     );
   }
   return <></>;

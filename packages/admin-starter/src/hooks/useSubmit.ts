@@ -30,7 +30,6 @@ function useSubmit(caller:SubmitCaller){
                 setProgress(authStore.inProgress)
             });
         }
-
     
     };
     useEffect(() => {
