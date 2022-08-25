@@ -1,7 +1,14 @@
 import { action, makeAutoObservable } from "mobx";
 import * as agent from "../apis/agent";
 const profileStore = makeAutoObservable({
-  profile: undefined,
+  profile: {
+    username: undefined,
+    following: undefined,
+    unfollow: undefined,
+    follow: undefined,
+    image: undefined,
+    bio: undefined
+},
   isLoadingProfile: false,
   loadProfile(username) {
     this.isLoadingProfile = true;

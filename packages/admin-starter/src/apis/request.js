@@ -12,7 +12,7 @@ const service = axios.create({
 service.interceptors.request.use((req) => {
   const headers = req.headers;
   const token = storage.getItem("jwt");
-  if (!headers.Authorization) headers.Authorization = 'Token '+ token;
+  if (!headers.Authorization&&token) headers.Authorization = 'Token '+ token;
   return req;
 });
 // 响应拦截器

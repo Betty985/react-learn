@@ -5,11 +5,16 @@ interface A {
 }
 const YourFeedTab: FC<A> = props => {
     const { currentUser } = props
+    const location = useLocation()
     if (currentUser) {
         return (
             <li className="nav-item">
                 <NavLink
-                    className="nav-link"
+                    className={({ isActive }) => {
+                        isActive = location.search.match(/tab=(feed)/) ? true : false
+                        return isActive ? 'nav-link active' : 'nav-link'
+                    }
+                    }
                     to={{
                         pathname: "/",
                         search: "?tab=feed"

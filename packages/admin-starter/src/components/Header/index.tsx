@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
 import useStores from "../../hooks/useStores";
@@ -8,7 +8,6 @@ interface LoggedProps {
 
 const LoggedOutView: FC<LoggedProps> = (props) => {
   const { currentUser } = props
-  console.log(currentUser)
   if (!currentUser) {
     return (
       <ul className="nav navbar-nav pull-xs-right">
@@ -42,36 +41,35 @@ const LoggedInView: FC<LoggedProps> = (props) => {
   if (currentUser) {
     return (
       <ul className="nav navbar-nav pull-xs-right">
+        <li className="nav-item">
+          <Link to="/" className="nav-link">
+            Home
+          </Link>
+        </li>
 
-      <li className="nav-item">
-        <Link to="/" className="nav-link">
-          Home
-        </Link>
-      </li>
+        <li className="nav-item">
+          <Link to="/editor" className="nav-link">
+            <i className="ion-compose" />&nbsp;New Post
+          </Link>
+        </li>
 
-      <li className="nav-item">
-        <Link to="/editor" className="nav-link">
-          <i className="ion-compose" />&nbsp;New Post
-        </Link>
-      </li>
+        <li className="nav-item">
+          <Link to="/settings" className="nav-link">
+            <i className="ion-gear-a" />&nbsp;Settings
+          </Link>
+        </li>
 
-      <li className="nav-item">
-        <Link to="/settings" className="nav-link">
-          <i className="ion-gear-a" />&nbsp;Settings
-        </Link>
-      </li>
+        <li className="nav-item">
+          <Link
+            to={`/@${props.currentUser.username}`}
+            className="nav-link"
+          >
+            <img src={props.currentUser.image} className="user-pic" alt="" />
+            {props.currentUser.username}
+          </Link>
+        </li>
 
-      <li className="nav-item">
-        <Link
-          to={`/@${props.currentUser.username}`}
-          className="nav-link"
-        >
-          <img src={props.currentUser.image} className="user-pic" alt="" />
-          {props.currentUser.username}
-        </Link>
-      </li>
-
-    </ul>
+      </ul>
     );
   }
   return <></>;
@@ -79,14 +77,19 @@ const LoggedInView: FC<LoggedProps> = (props) => {
 
 const Header: FC = () => {
   const { userStore, commonStore } = useStores();
+  const [currentUser, setUser] = useState(userStore.currentUser)
+  useEffect(() => {
+    setUser(userStore.currentUser)
+    console.log(userStore)
+  })
   return (
     <nav className="navbar navbar-light">
       <div className="container">
         <Link to="/" className="navbar-brand">
           {commonStore.appName.toLowerCase()}
         </Link>
-        <LoggedOutView currentUser={userStore.currentUser} />
-        <LoggedInView currentUser={userStore.currentUser} />
+        <LoggedOutView currentUser={currentUser} />
+        <LoggedInView currentUser={currentUser} />
       </div>
     </nav>
   );

@@ -1,47 +1,9 @@
 import useStores from "../../hooks/useStores";
 import React, { FC, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-const classes = "btn btn-sm action-btn";
-const followingClasses = classes + " btn-secondary";
-const unfollowingClasses = classes + "  btn-outline-secondary";
+import useProfile from "../../hooks/useProfile";
 const ProfilePage: FC = () => {
-    const { profileStore, userStore } = useStores()
-    const [profile, setProfile] = useState({
-        username: undefined,
-        following: undefined,
-        unfollow: undefined,
-        follow: undefined,
-        image: undefined,
-        bio: undefined
-    });
-    const [btnClasses,setBtn]=useState('')
-    const { currentUser } = userStore;
-    const params = useParams()
-    useEffect(() => {
-        profileStore.loadProfile(params.username).then(() => {
-            setProfile(profileStore.profile)
-            setBtn(profile.following?followingClasses:unfollowingClasses)
-        }
-        )
-    }, [])
-    const isUser = currentUser && profile?.username === currentUser.username;
-    const handleClick = e => {
-        e.preventDefault();
-        if (profile.following) {
-            profileStore.unfollow(params.username)
-                .then(() => {
-                    setProfile(profileStore.profile)
-                    setBtn(unfollowingClasses)
-                })
-        } else {
-            profileStore.follow(params.username)
-                .then(() => {
-                    setProfile(profileStore.profile)
-                    setBtn(followingClasses)
-                })
-        }
-    };
-
+    const { profile ,btnClasses,params,handleClick,isAuthor,} = useProfile()
     return (
         <div className="profile-page">
             <div className="user-info">
@@ -52,7 +14,7 @@ const ProfilePage: FC = () => {
                             <h4>{profile.username}</h4>
                             <p>{profile.bio}</p>
 
-                            {isUser ? (
+                            {isAuthor? (
                                 <Link
                                     to="/settings"
                                     className="btn btn-sm btn-outline-secondary action-btn"
