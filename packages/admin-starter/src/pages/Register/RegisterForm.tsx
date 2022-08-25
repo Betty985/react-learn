@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import ListErrors from "../../components/ListErrors";
 import useStores from "../../hooks/useStores";
 import { observer } from "mobx-react";
@@ -6,13 +6,21 @@ import { useNavigate } from "react-router-dom";
 const RegisterForm: FC = observer(() => {
     const navigate = useNavigate();
     const { authStore } = useStores()
-    const { values, errors, inProgress } = authStore
+    const [err,setErr]=useState([])
+    const [inProgress,setProgress]=useState(false)
+    const { values} = authStore
     const handleUsernameChange = e => authStore.setUsername(e.target.value);
     const handleEmailChange = e => authStore.setEmail(e.target.value);
     const handlePasswordChange = e => authStore.setPassword(e.target.value);
     const handleSubmitForm = e => {
         e.preventDefault();
-        authStore.register().then(() => navigate("/"));
+        setProgress(true)
+        authStore.register().then(() =>{ 
+            navigate("/")
+        }).finally(()=>{
+            setErr(authStore.errors)
+            setProgress(authStore.inProgress)
+        });
 
     };
     useEffect(() => {
@@ -22,7 +30,7 @@ const RegisterForm: FC = observer(() => {
     }, [])
     return (
         <>
-            <ListErrors errors={errors} />
+            <ListErrors errors={err} />
             <form onSubmit={handleSubmitForm}>
                 <fieldset>
                     <fieldset className="form-group">

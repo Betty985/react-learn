@@ -1,8 +1,9 @@
 import { observable, action, reaction } from "mobx";
 import * as agent from "../apis/agent";
+import storage from "../hooks/storage";
 class CommonStore {
   @observable appName = "Conduit";
-  @observable token = window.localStorage.getItem("jwt");
+  @observable token = storage.getItem("jwt");
   @observable appLoaded = false;
   @observable tags = [];
   @observable isLoadingTags = false;
@@ -11,9 +12,10 @@ class CommonStore {
       () => this.token,
       (token) => {
         if (token) {
-          window.localStorage.setItem("jwt", token);
+          console.log(token,'token')
+          storage.setItem("jwt", token);
         } else {
-          window.localStorage.removeItem("jwt");
+          storage.removeItem("jwt");
         }
       }
     );

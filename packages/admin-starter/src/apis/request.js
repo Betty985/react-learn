@@ -2,10 +2,18 @@
  * axios二次封装
  */
 import axios from "axios";
-import config from "./config";
+import config from "../config";
+import storage from "../hooks/storage";
 const service = axios.create({
   baseURL: config.baseApi,
   timeout: 8000,
+});
+// 请求拦截器
+service.interceptors.request.use((req) => {
+  const headers = req.headers;
+  const { token } = storage.getItem("userInfo");
+  if (!headers.Authorization) headers.Authorization =  token;
+  return req;
 });
 // 响应拦截器
 service.interceptors.response.use(
@@ -21,11 +29,13 @@ service.interceptors.response.use(
     }
   },
   // 请求失败
-  (err) => {
+  ({response}) => {
+    const err=response.data.errors
     return Promise.reject(err)
   }
 )
 function request(options) {
+  console.log(options)
   options.method = options.method || "get";
   if (options.method.toLowerCase() === "get") {
     options.params = options.data;
