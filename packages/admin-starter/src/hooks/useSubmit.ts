@@ -56,7 +56,6 @@ function useSubmit(caller: SubmitCaller) {
         }
         if (caller === SubmitCaller.EDITOR) {
             editorStore.submit().then(article => {      
-                console.log(article)
                 navigate(`/article/${article.slug}`, { replace: true });
             }).finally(() => {
                 setErr(editorStore.errors)

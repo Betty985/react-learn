@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react";
 import useStores from "../../hooks/useStores";
@@ -8,6 +8,7 @@ interface LoggedProps {
 
 const LoggedOutView: FC<LoggedProps> = (props) => {
   const { currentUser } = props
+  console.log(currentUser)
   if (!currentUser) {
     return (
       <ul className="nav navbar-nav pull-xs-right">

@@ -1,25 +1,32 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {  observer } from "mobx-react";
+import { observer } from "mobx-react";
 import useStores from "../../hooks/useStores";
 const FAVORITED_CLASS = "btn btn-sm btn-primary";
 const NOT_FAVORITED_CLASS = "btn btn-sm btn-outline-primary";
 
-interface A{
-  article:any
+interface A {
+  article: any
 }
 const ArticlePreview: FC<A> = (props) => {
   const { article } = props;
   const { articlesStore } = useStores();
+  const [favorited, setFavorited] = useState(article.favorited)
   const handleClickFavorite = (e) => {
     e.preventDefault();
-    if (article.favorited) {
-      articlesStore.unmakeFavorite(article.slug);
+    if (favorited) {
+      articlesStore.unmakeFavorite(article.slug)
+        .then(() => {
+          setFavorited(false)
+        })
     } else {
-      articlesStore.makeFavorite(article.slug);
+      articlesStore.makeFavorite(article.slug)
+        .then(() => {
+          setFavorited(true)
+        })
     }
   };
-  const favoriteButtonClass = article.favorited
+  const favoriteButtonClass = favorited
     ? FAVORITED_CLASS
     : NOT_FAVORITED_CLASS;
 
