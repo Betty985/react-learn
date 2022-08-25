@@ -11,8 +11,10 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use((req) => {
   const headers = req.headers;
-  const { token } = storage.getItem("userInfo");
-  if (!headers.Authorization) headers.Authorization =  token;
+  const token = storage.getItem("jwt");
+  console.log(token)
+  if (!headers.Authorization) headers.Authorization = 'Token '+ token;
+  console.log(req)
   return req;
 });
 // 响应拦截器

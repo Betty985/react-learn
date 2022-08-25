@@ -37,6 +37,7 @@ function useSubmit(caller:SubmitCaller){
         setValues(authStore.values)
         return () => { 
             authStore.reset() 
+            setErr([])
         }
     }, [])
     return {

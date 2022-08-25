@@ -12,7 +12,6 @@ class CommonStore {
       () => this.token,
       (token) => {
         if (token) {
-          console.log(token,'token')
           storage.setItem("jwt", token);
         } else {
           storage.removeItem("jwt");
@@ -31,6 +30,7 @@ class CommonStore {
   }
   @action setToken(token) {
     this.token = token;
+    storage.setItem("jwt", token);
   }
 
   @action setAppLoaded() {
