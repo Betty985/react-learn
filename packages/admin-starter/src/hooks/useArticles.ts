@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import useStores from './useStores'
 import { parse as qsParse } from "query-string";
 import { useLocation, useParams } from "react-router-dom";
-import { Caller } from '../typings'
-function useArticles(caller: Caller) {
+import { ArticlesCaller } from '../typings'
+function useArticles(caller: ArticlesCaller) {
     const { articlesStore, } = useStores()
     const [articles, setArticles] = useState([])
     const [isLoading, setLoading] = useState(true)
@@ -12,11 +12,11 @@ function useArticles(caller: Caller) {
     const location = useLocation()
     const params = useParams()
     function getTab(): string {
-        if (caller === Caller.PROFILE) {
+        if (caller === ArticlesCaller.PROFILE) {
             if (/\/favorites/.test(location.pathname)) return "favorites";
             return "all";
         }
-        if (caller === Caller.HOME) {
+        if (caller === ArticlesCaller.HOME) {
             return qsParse(location.search).tab as string || "all";
         }
     }
@@ -41,7 +41,7 @@ function useArticles(caller: Caller) {
 
     const getPredicate = () => {
         const tab = getTab()
-        if (caller === Caller.HOME) {
+        if (caller === ArticlesCaller.HOME) {
             switch (tab) {
                 case "feed":
                     return { myFeed: true };
@@ -53,7 +53,7 @@ function useArticles(caller: Caller) {
                     return {};
             }
         }
-        if (caller === Caller.PROFILE) {
+        if (caller === ArticlesCaller.PROFILE) {
             switch (tab) {
                 case "favorites":
                     return { favoritedBy: params.username };

@@ -1,31 +1,20 @@
 import ListErrors from "../../components/ListErrors";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { observer } from "mobx-react";
-import useStores from "../../hooks/useStores";
-import { useNavigate } from "react-router-dom";
+import useSubmit from "../../hooks/useSubmit";
+import { SubmitCaller } from '../../typings'
 const LoginForm: FC = observer(() => {
-    const { authStore } = useStores()
-    const navigate = useNavigate()
-    const { values, errors, inProgress } = authStore;
-    const handleEmailChange = e => {
-        authStore.setEmail(e.target.value);
-    };
-
-    const handlePasswordChange = e => {
-        authStore.setPassword(e.target.value);
-    };
-
-    const handleSubmitForm = e => {
-        e.preventDefault();
-        authStore.login().then(() => navigate("/", { replace: true }));
-    };
-    useEffect(() => {
-        return authStore.reset()
-    },[])
+    const {
+        err,
+        inProgress,
+        values,
+        handleEmailChange,
+        handlePasswordChange,
+        handleSubmitForm
+    } = useSubmit(SubmitCaller.LOGIN)
     return (
         <>
-            <ListErrors errors={errors} />
-
+            <ListErrors errors={err} />
             <form onSubmit={handleSubmitForm}>
                 <fieldset>
                     <fieldset className="form-group">

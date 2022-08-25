@@ -6,11 +6,11 @@ import { parse as qsParse } from "query-string";
 import useStores from "../../../hooks/useStores";
 import { useLocation } from "react-router-dom";
 import useArticles from "../../../hooks/useArticles";
-import { Caller } from "../../../typings";
+import { ArticlesCaller } from "../../../typings";
 const MainView: FC = observer(() => {
     const { articlesStore, userStore } = useStores()
     const location = useLocation()
-    const {articles,isLoading}=useArticles(Caller.HOME)
+    const {articles,isLoading}=useArticles(ArticlesCaller.HOME)
     const { currentUser } = userStore
     const {
         page,

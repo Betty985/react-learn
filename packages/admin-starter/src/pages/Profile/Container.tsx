@@ -3,12 +3,12 @@ import React, { FC, useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import useStores from "../../hooks/useStores";
 import useArticles from "../../hooks/useArticles";
-import { Caller } from "../../typings";
+import { ArticlesCaller } from "../../typings";
 import useProfile from "../../hooks/useProfile";
 const Container: FC = () => {
   const { articlesStore } = useStores();
   const { profile } = useProfile();
-  const { articles, isLoading } = useArticles(Caller.PROFILE)
+  const { articles, isLoading } = useArticles(ArticlesCaller.PROFILE)
   const { totalPagesCount, page } = articlesStore;
   const location = useLocation()
   const handleSetPage = (page) => {

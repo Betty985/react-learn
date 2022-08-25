@@ -1,33 +1,18 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import ListErrors from "../../components/ListErrors";
-import useStores from "../../hooks/useStores";
 import { observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import useSubmit from "../../hooks/useSubmit";
+import { SubmitCaller } from '../../typings'
 const RegisterForm: FC = observer(() => {
-    const navigate = useNavigate();
-    const { authStore } = useStores()
-    const [err,setErr]=useState([])
-    const [inProgress,setProgress]=useState(false)
-    const { values} = authStore
-    const handleUsernameChange = e => authStore.setUsername(e.target.value);
-    const handleEmailChange = e => authStore.setEmail(e.target.value);
-    const handlePasswordChange = e => authStore.setPassword(e.target.value);
-    const handleSubmitForm = e => {
-        e.preventDefault();
-        setProgress(true)
-        authStore.register().then(() =>{ 
-            navigate("/")
-        }).finally(()=>{
-            setErr(authStore.errors)
-            setProgress(authStore.inProgress)
-        });
-
-    };
-    useEffect(() => {
-        return () => { 
-            authStore.reset() 
-        }
-    }, [])
+    const {
+        err,
+        inProgress,
+        values,
+        handleUsernameChange,
+        handleEmailChange,
+        handlePasswordChange,
+        handleSubmitForm
+    } = useSubmit(SubmitCaller.REGISTER)
     return (
         <>
             <ListErrors errors={err} />
@@ -68,7 +53,7 @@ const RegisterForm: FC = observer(() => {
                         type="submit"
                         disabled={inProgress}
                     >
-                       Sign Up
+                        Sign Up
                     </button>
                 </fieldset>
             </form>
