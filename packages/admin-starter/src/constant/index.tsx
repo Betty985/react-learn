@@ -1,6 +1,6 @@
 const PATH_LOGIN='/login'
 const PATH_REGISTER='/register'
-const PATH_EDITOR='/editor/:slug?'
+const PATH_EDITOR='/editor/*'
 const PATH_ARTICLE='/article/:id'
 const PATH_SETTINGS='/settings'
 const PATH_PROFILE='/@:username/*'

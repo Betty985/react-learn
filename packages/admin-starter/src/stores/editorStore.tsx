@@ -56,7 +56,7 @@ const EditorStore = makeAutoObservable({
   removeTag(tag) {
     this.tagList = this.tagList.filter((t) => t !== tag);
   },
-  ubmit() {
+  submit() {
     this.inProgress = true;
     this.errors = undefined;
     const article = {
@@ -66,13 +66,12 @@ const EditorStore = makeAutoObservable({
       tagList: this.tagList,
       slug: this.articleSlug,
     };
-    this.articleSlug = this.articleSlug
+    return (this.articleSlug
       ? articlesStore.updateArticle(article)
-      : articlesStore.createArticle(article);
-    return this.articleSlug
+      : articlesStore.createArticle(article))
       .catch(
         action((err) => {
-          this.errors = err?.response?.body?.errors;
+          this.errors = err
           throw err;
         })
       )

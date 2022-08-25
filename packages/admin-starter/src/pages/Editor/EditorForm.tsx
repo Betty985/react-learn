@@ -1,24 +1,28 @@
 import useStores from "../../hooks/useStores";
 import React, { FC, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ListErrors from "../../components/ListErrors";
+import useSubmit from "../../hooks/useSubmit";
+import { SubmitCaller } from "../../typings";
 const EditorForm: FC = () => {
     const params = useParams();
-    const navigate = useNavigate()
-    const [tagInput, setTagInput] = useState('')
+    const [tagList, setTagList] = useState([])
     const { editorStore } = useStores()
     const {
+        err,
         inProgress,
-        errors,
         title,
         description,
         body,
-        tagList
-    } = editorStore;
-    const changeTitle = e => editorStore.setTitle(e.target.value);
-    const changeDescription = e => editorStore.setDescription(e.target.value);
-    const changeBody = e => editorStore.setBody(e.target.value);
-    const changeTagInput = e => setTagInput(e.target.value);
+        tagInput,
+        setTagInput,
+        handleSubmitForm,
+        handleTitleChange,
+        handleDescriptionChange,
+        handleBodyChange,
+        handleTagInputChange
+    } = useSubmit(SubmitCaller.EDITOR);
+
     const handleTagInputKeyDown = e => {
         switch (e.keyCode) {
             case 13: // Enter
@@ -36,20 +40,14 @@ const EditorForm: FC = () => {
         if (tagInput) {
             editorStore.addTag(tagInput.trim());
             setTagInput('')
+            setTagList(editorStore.tagList)
         }
     };
 
     const handleRemoveTag = tag => {
         if (editorStore.inProgress) return;
         editorStore.removeTag(tag);
-    };
-
-    const submitForm = ev => {
-        ev.preventDefault();
-        editorStore.submit().then(article => {
-            editorStore.reset();
-            navigate(`/article/${article.slug}`, { replace: true });
-        });
+        setTagList(editorStore.tagList)
     };
     useEffect(() => {
         editorStore.setArticleSlug(params.slug);
@@ -57,16 +55,16 @@ const EditorForm: FC = () => {
     }, [params.slug])
     return (
         <>
-            <ListErrors errors={errors} />
+            <ListErrors errors={err} />
             <form>
                 <fieldset>
                     <fieldset className="form-group">
                         <input
                             className="form-control form-control-lg"
                             type="text"
-                            placeholder="文章标题"
+                            placeholder="Article Title"
                             value={title}
-                            onChange={changeTitle}
+                            onChange={handleTitleChange}
                             disabled={inProgress}
                         />
                     </fieldset>
@@ -75,9 +73,9 @@ const EditorForm: FC = () => {
                         <input
                             className="form-control"
                             type="text"
-                            placeholder="这篇文章关于什么？"
+                            placeholder="What's this article about?"
                             value={description}
-                            onChange={changeDescription}
+                            onChange={handleDescriptionChange}
                             disabled={inProgress}
                         />
                     </fieldset>
@@ -86,9 +84,9 @@ const EditorForm: FC = () => {
                         <textarea
                             className="form-control"
                             rows={8}
-                            placeholder="用markdown写文章"
+                            placeholder="Write your article (in markdown)"
                             value={body}
-                            onChange={changeBody}
+                            onChange={handleBodyChange}
                             disabled={inProgress}
                         />
                     </fieldset>
@@ -99,7 +97,7 @@ const EditorForm: FC = () => {
                             type="text"
                             placeholder="Enter tags"
                             value={tagInput}
-                            onChange={changeTagInput}
+                            onChange={handleTagInputChange}
                             onBlur={handleAddTag}
                             onKeyDown={handleTagInputKeyDown}
                             disabled={inProgress}
@@ -122,11 +120,11 @@ const EditorForm: FC = () => {
 
                     <button
                         className="btn btn-lg pull-xs-right btn-primary"
-                        type="button"
+                        type="submit"
                         disabled={inProgress}
-                        onClick={submitForm}
+                        onClick={handleSubmitForm}
                     >
-                        发文章
+                       Publish Article
                     </button>
                 </fieldset>
             </form>

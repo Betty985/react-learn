@@ -121,14 +121,14 @@ const articlesStore = makeAutoObservable({
   },
 
   createArticle(article) {
-    agent.articles.create(article).then(({ article }) => {
+    return agent.articles.create(article).then(({ article }) => {
       this.articlesRegistry.set(article.slug, article);
       return article;
     });
   },
 
   updateArticle(article) {
-    agent.articles.update(article).then(({ article }) => {
+    return agent.articles.update(article).then(({ article }) => {
       this.articlesRegistry.set(article.slug, article);
       return article;
     });

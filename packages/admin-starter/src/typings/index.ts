@@ -4,5 +4,6 @@ export enum ArticlesCaller {
 }
 export enum SubmitCaller {
     LOGIN = 1,
-    REGISTER = 2
+    REGISTER = 2,
+    EDITOR = 3
 }
