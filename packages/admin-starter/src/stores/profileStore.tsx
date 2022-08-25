@@ -21,7 +21,7 @@ const profileStore = makeAutoObservable({
   follow() {
     if (this.profile&&!this.profile?.following) {
       this.profile.following = true;
-      agent.profile.follow(this.profile.username).catch(
+      return agent.profile.follow(this.profile.username).catch(
         action(() => {
           this.profile.following = false;
         })
@@ -31,7 +31,7 @@ const profileStore = makeAutoObservable({
   unfollow() {
     if (this.profile?.following) {
       this.profile.following = false;
-      agent.profile.unfollow(this.profile.username).catch(
+      return agent.profile.unfollow(this.profile.username).catch(
         action(() => {
           this.profile.following = true;
         })

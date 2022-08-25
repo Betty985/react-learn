@@ -6,30 +6,39 @@ const followingClasses = classes + " btn-secondary";
 const unfollowingClasses = classes + "  btn-outline-secondary";
 const ProfilePage: FC = () => {
     const { profileStore, userStore } = useStores()
-    const [profile,setProfile]=useState({
-        username:undefined,
-        following:undefined,
-        unfollow:undefined,
-        follow:undefined,
-        image:undefined,
-        bio:undefined
-    }) ;
+    const [profile, setProfile] = useState({
+        username: undefined,
+        following: undefined,
+        unfollow: undefined,
+        follow: undefined,
+        image: undefined,
+        bio: undefined
+    });
+    const [btnClasses,setBtn]=useState('')
     const { currentUser } = userStore;
-    const params=useParams()
-    useEffect(()=>{
-        profileStore.loadProfile(params.username).then(()=>{
+    const params = useParams()
+    useEffect(() => {
+        profileStore.loadProfile(params.username).then(() => {
             setProfile(profileStore.profile)
+            setBtn(profile.following?followingClasses:unfollowingClasses)
         }
         )
-    },[])
+    }, [])
     const isUser = currentUser && profile?.username === currentUser.username;
-    const btnClasses = profile?.following ? followingClasses : unfollowingClasses
     const handleClick = e => {
         e.preventDefault();
         if (profile.following) {
-            profileStore.unfollow(params.username);
+            profileStore.unfollow(params.username)
+                .then(() => {
+                    setProfile(profileStore.profile)
+                    setBtn(unfollowingClasses)
+                })
         } else {
-            profileStore.follow(params.username);
+            profileStore.follow(params.username)
+                .then(() => {
+                    setProfile(profileStore.profile)
+                    setBtn(followingClasses)
+                })
         }
     };
 
