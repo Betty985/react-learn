@@ -20,23 +20,26 @@ const routes: RouteObj[] = [
     },
     {
         path: PATH_SETTINGS,
-        element: <Settings />
+        element: <Settings />,
+        auth:true
     },
     {
         path: PATH_EDITOR,
-        element: <Editor />
+        element: <Editor />,
+        auth:true
     },
     {
         path: PATH_PROFILE,
-        element: <Profile />
+        element: <Profile />,
+        auth:true
     },
     {
         path: PATH_HOME,
-        element: <Home />
+        element: <Home />,
     },
     {
         path: PATH_REGISTER,
-        element: <Register />
+        element: <Register />,
     },
     {
         path: PATH_NOTMATCH,

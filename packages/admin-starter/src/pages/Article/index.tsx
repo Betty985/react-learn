@@ -27,7 +27,6 @@ const Article: FC = () => {
             setComments(commentsStore.comments)
             setLoading(false)
         })
-
     }, [])
     const slug = params.id
     const { currentUser } = userStore

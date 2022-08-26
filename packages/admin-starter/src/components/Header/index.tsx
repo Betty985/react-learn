@@ -79,9 +79,11 @@ const Header: FC = () => {
   const { userStore, commonStore } = useStores();
   const [currentUser, setUser] = useState(userStore.currentUser)
   useEffect(() => {
-    setUser(userStore.currentUser)
-    console.log(userStore)
-  })
+    userStore.pullUser().then(()=>{
+      setUser(userStore.currentUser)
+      console.log(userStore)
+    })
+  },[])
   return (
     <nav className="navbar navbar-light">
       <div className="container">
