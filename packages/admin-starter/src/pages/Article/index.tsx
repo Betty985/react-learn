@@ -5,6 +5,7 @@ import RedError from "../../components/RedError";
 import ArticleMeta from "./components/ArticleMeta";
 import CommentContainer from "./components/Comment";
 import useStores from "../../hooks/useStores";
+import DOMPurify from 'dompurify';
 const Article: FC = () => {
     const { articlesStore, commentsStore, userStore } = useStores()
     const params = useParams()
@@ -33,7 +34,8 @@ const Article: FC = () => {
     const { commentErrors } = commentsStore
     const article = articlesStore.getArticle(slug)
     const canModify = currentUser?.username === article.author.username
-    const markup = { __html: marked.parse(article.body) }
+    const clean = DOMPurify.sanitize(article.body);
+    const markup = { __html: marked.parse(clean) }
     if (!article) return <RedError message="无法加载文章" />;
     return (
         <div className="article-page">
