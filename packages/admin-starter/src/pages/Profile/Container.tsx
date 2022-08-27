@@ -1,5 +1,5 @@
 import ArticleList from "../../components/ArticleList";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import useStores from "../../hooks/useStores";
 import useArticles from "../../hooks/useArticles";
@@ -8,9 +8,9 @@ import useProfile from "../../hooks/useProfile";
 const Container: FC = () => {
   const { articlesStore } = useStores();
   const { profile } = useProfile();
-  const { articles, isLoading } = useArticles(ArticlesCaller.PROFILE)
+  const { articles, isLoading } = useArticles(ArticlesCaller.PROFILE);
   const { totalPagesCount, page } = articlesStore;
-  const location = useLocation()
+  const location = useLocation();
   const handleSetPage = (page) => {
     articlesStore.setPage(page);
     articlesStore.loadArticles();
@@ -22,11 +22,15 @@ const Container: FC = () => {
           <div className="articles-toggle">
             <ul className="nav nav-pills outline-active">
               <li className="nav-item">
-                <NavLink className={({ isActive }) => {
-                  isActive = /\/favorites/.test(location.pathname) ? false : true
-                  return isActive ? 'nav-link active' : 'nav-link'
-                }}
-                  to={`/@${profile.username}`}>
+                <NavLink
+                  className={({ isActive }) => {
+                    isActive = /\/favorites/.test(location.pathname)
+                      ? false
+                      : true;
+                    return isActive ? "nav-link active" : "nav-link";
+                  }}
+                  to={`/@${profile.username}`}
+                >
                   My Articles
                 </NavLink>
               </li>
