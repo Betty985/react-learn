@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import useStores from "./useStores";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useCurrentUser from "./useCurrentUser";
+import DOMPurify from "dompurify";
+import { marked } from "marked";
 function useArticle() {
   const { articlesStore, commentsStore } = useStores();
   const { currentUser } = useCurrentUser();
   const params = useParams();
-  const [comments, setComments] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+
   const [article, setArticle] = useState({
     author: {
       bio: null,
@@ -25,6 +27,7 @@ function useArticle() {
     slug: "",
     updatedAt: "",
   });
+  const [markup, setMarkup] = useState({ __html: "" });
   //   todo:类型
   const [canModify, setModify] = useState(false);
   const [slug, setSlug] = useState(params.id);
@@ -33,16 +36,26 @@ function useArticle() {
     commentsStore.setArticleSlug(slug);
     articlesStore.loadArticles(slug, { acceptCached: true }).then(() => {
       setArticle(articlesStore.getArticle(slug));
+      const clean = DOMPurify.sanitize(article.body);
+      setMarkup({ __html: marked.parse(clean) });
       if (currentUser) {
         setModify(currentUser.username === article.author.username);
       }
     });
-    commentsStore.loadComments().then(() => {
-      setComments(commentsStore.comments);
-      setLoading(false);
-    });
   }, []);
+  const navigate = useNavigate();
+  const handleDeleteArticle = (slug) => {
+    articlesStore
+      .deleteArticle(slug)
+      .then(() => navigate("/", { replace: true }));
+  };
 
-  return { canModify, article, slug, comments, isLoading };
+  return {
+    markup,
+    canModify,
+    article,
+    slug,
+    handleDeleteArticle,
+  };
 }
 export default useArticle;
