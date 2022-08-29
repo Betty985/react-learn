@@ -8,10 +8,9 @@ import { useLocation } from "react-router-dom";
 import useArticles from "../../../hooks/useArticles";
 import { ArticlesCaller } from "../../../typings";
 const MainView: FC = observer(() => {
-  const { articlesStore, userStore } = useStores();
+  const { articlesStore} = useStores();
   const location = useLocation();
   const { articles, isLoading } = useArticles(ArticlesCaller.HOME);
-  const { currentUser } = userStore;
   const { page, totalPagesCount } = articlesStore;
   const handleSetPage = (page) => {
     articlesStore.setPage(page);
@@ -21,7 +20,7 @@ const MainView: FC = observer(() => {
     <div className="col-md-9">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
-          <YourFeedTab currentUser={currentUser} />
+          <YourFeedTab />
           <GlobalFeedTab />
           <TagFilterTab tag={qsParse(location.search).tag} />
         </ul>

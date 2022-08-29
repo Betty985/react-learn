@@ -7,7 +7,7 @@ function useCurrentUser() {
     userStore.pullUser().then(() => {
       setUser(userStore.currentUser);
     });
-  }, []);
+  }, [userStore]);
   return { currentUser };
 }
 export default useCurrentUser;
