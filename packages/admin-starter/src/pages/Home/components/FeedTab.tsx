@@ -1,10 +1,9 @@
+import useCurrentUser from "../../../hooks/useCurrentUser";
 import React, { FC } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-interface A {
-    currentUser: any
-}
-const YourFeedTab: FC<A> = props => {
-    const { currentUser } = props
+
+const YourFeedTab: FC = ()=> {
+    const { currentUser } =useCurrentUser()
     const location = useLocation()
     if (currentUser) {
         return (

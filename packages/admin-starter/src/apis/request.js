@@ -30,7 +30,7 @@ service.interceptors.response.use(
   },
   // 请求失败
   ({response}) => {
-    const err=response.data.errors
+    const err=response?.data?.errors
     return Promise.reject(err)
   }
 )

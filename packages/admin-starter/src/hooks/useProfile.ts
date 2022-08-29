@@ -1,17 +1,17 @@
 import useStores from "./useStores";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { FOLLOW_BTN, UNFOLLOW_BTN } from "../constant";
-import useCurrentUser from "./useCurrentUser";
+import { FOLLOW_BTN, UNFOLLOW_BTN, INIT_BTN } from "../constant";
 function useProfile() {
-  const { profileStore } = useStores();
-  const { currentUser } = useCurrentUser();
+  const { profileStore, userStore } = useStores();
+  const { currentUser } = userStore;
   const params = useParams();
-  const [btnClasses, setBtn] = useState("btn btn-sm action-btn");
+  const [btnClasses, setBtn] = useState(INIT_BTN);
   const [profile, setProfile] = useState(profileStore.profile);
   const [isAuthor, setIsAuthor] = useState(
-    profile?.username === currentUser?.username
+    profile?.username === currentUser.username
   );
+  const [isLoadingProfile, setLoadingProfile] = useState(true);
   // const isUser = currentUser && ;
   const handleClick = (e) => {
     e.preventDefault();
@@ -28,17 +28,25 @@ function useProfile() {
   useEffect(() => {
     profileStore.loadProfile(params.username).then(() => {
       setProfile(profileStore.profile);
-      setIsAuthor(profileStore.profile?.username === currentUser.username);
     });
   }, []);
-  useEffect(() => {
-    if (profile.username !== params.name) {
-      profileStore.loadProfile(params.username).then(() => {
-        setProfile(profileStore.profile);
-        setIsAuthor(profile?.username === currentUser.username);
-      });
+  useLayoutEffect(() => {
+    if (currentUser) {
+      setIsAuthor(profile?.username === currentUser.username);
+    } else {
+      setIsAuthor(false);
     }
-  }, []);
-  return { profile, isAuthor, btnClasses, params, handleClick };
+  });
+  useEffect(() => {
+    setLoadingProfile(profileStore.isLoadingProfile);
+  });
+  return {
+    isLoadingProfile,
+    profile,
+    isAuthor,
+    btnClasses,
+    params,
+    handleClick,
+  };
 }
 export default useProfile;

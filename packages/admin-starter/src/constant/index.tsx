@@ -8,6 +8,7 @@ const PATH_PROFILE='/@:username/*'
 const PATH_HOME='/'
 const PATH_NOTMATCH='/*'
 // 主页按钮样式
+const INIT_BTN='btn btn-sm action-btn '
 const FOLLOW_BTN='btn btn-sm action-btn btn-secondary'
 const UNFOLLOW_BTN='btn btn-sm action-btn btn-outline-secondary'
 export { 
@@ -19,6 +20,7 @@ export {
     PATH_PROFILE,
     PATH_HOME,
     PATH_NOTMATCH,
+    INIT_BTN,
     FOLLOW_BTN,
     UNFOLLOW_BTN
 }
