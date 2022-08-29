@@ -8,7 +8,7 @@ function useArticle() {
   const params = useParams();
   const [comments, setComments] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [article, setArticle] = useState({
+  const [article, setArticle] = useState(()=>({
     author: {
       bio: null,
       following: false,
@@ -24,7 +24,7 @@ function useArticle() {
     favoritesCount: 0,
     slug: "",
     updatedAt: "",
-  });
+  }));
   //   todo:类型
   const [canModify, setModify] = useState(false);
   const [slug, setSlug] = useState(params.id);
@@ -41,7 +41,7 @@ function useArticle() {
       setComments(commentsStore.comments);
       setLoading(false);
     });
-  }, []);
+  }, [params]);
 
   return { canModify, article, slug, comments, isLoading };
 }

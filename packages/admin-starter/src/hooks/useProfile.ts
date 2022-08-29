@@ -8,7 +8,7 @@ function useProfile() {
   const params = useParams();
   const [btnClasses, setBtn] = useState(INIT_BTN);
   const [profile, setProfile] = useState(profileStore.profile);
-  const [isAuthor, setIsAuthor] = useState(profile?.username === currentUser.username);
+  const [isAuthor, setIsAuthor] = useState(()=>profile?.username === currentUser.username);
   const [isLoadingProfile, setLoadingProfile] = useState(true);
   // const isUser = currentUser && ;
   const handleClick = (e) => {
