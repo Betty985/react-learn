@@ -9,7 +9,7 @@ function useProfile() {
   const [btnClasses, setBtn] = useState(INIT_BTN);
   const [profile, setProfile] = useState(profileStore.profile);
   const [isAuthor, setIsAuthor] = useState(
-    profile?.username === currentUser.username
+    () => profile?.username === currentUser.username
   );
   const [isLoadingProfile, setLoadingProfile] = useState(true);
   // const isUser = currentUser && ;

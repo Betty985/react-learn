@@ -28,8 +28,8 @@ function useArticles(caller: ArticlesCaller) {
     });
   }, [state, articlesStore]);
   useEffect(() => {
-    if (JSON.stringify(state) != JSON.stringify(getPredicate())) {
-      setState(getPredicate());
+    if (JSON.stringify(state) !== JSON.stringify(getPredicate())) {
+      setState(() => getPredicate());
       setLoading(true);
       articlesStore.setPredicate(getPredicate());
       articlesStore.loadArticles().then(() => {
