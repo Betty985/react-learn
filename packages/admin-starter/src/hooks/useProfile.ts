@@ -1,5 +1,5 @@
 import useStores from "./useStores";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FOLLOW_BTN, UNFOLLOW_BTN, INIT_BTN } from "../constant";
 function useProfile() {
@@ -8,9 +8,10 @@ function useProfile() {
   const params = useParams();
   const [btnClasses, setBtn] = useState(INIT_BTN);
   const [profile, setProfile] = useState(profileStore.profile);
-  const [isAuthor, setIsAuthor] = useState(()=>profile?.username === currentUser.username);
+  const profileRef=useRef(profile)
+  profileRef.current=profile
+  const [isAuthor, setIsAuthor] = useState(()=>params.username === userStore.currentUser.username);
   const [isLoadingProfile, setLoadingProfile] = useState(true);
-  // const isUser = currentUser && ;
   const handleClick = (e) => {
     e.preventDefault();
     if (profile.following) {
@@ -25,22 +26,21 @@ function useProfile() {
   };
   useEffect(() => {
     profileStore.loadProfile(params.username).then(()=>{
-        setProfile(profileStore.profile);
+        setProfile(profileStore.profile); 
+        if (currentUser) {
+          setIsAuthor(()=>profileStore.profile.username === currentUser.username);
+        } else {
+          setIsAuthor(false);
+        }
     });
-  },[]);
-  useLayoutEffect(()=>{
-    if (currentUser) {
-        setIsAuthor(profile?.username === currentUser.username);
-      } else {
-        setIsAuthor(false);
-      }
-  })
-  useEffect(() => {
+  },[currentUser,params.username]);
+  useEffect(()=>{
     setLoadingProfile(profileStore.isLoadingProfile);
-  });
+  })
+ 
   return {
     isLoadingProfile,
-    profile,
+    profile:profileRef.current,
     isAuthor,
     btnClasses,
     params,

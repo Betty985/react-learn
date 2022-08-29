@@ -35,7 +35,6 @@ service.interceptors.response.use(
   }
 )
 function request(options) {
-  console.log(options)
   options.method = options.method || "get";
   if (options.method.toLowerCase() === "get") {
     options.params = options.data;
