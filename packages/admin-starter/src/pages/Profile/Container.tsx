@@ -37,7 +37,12 @@ const Container: FC = () => {
 
               <li className="nav-item">
                 <NavLink
-                  className="nav-link"
+                  className={({ isActive }) => {
+                    isActive = /\/favorites/.test(location.pathname)
+                      ? true
+                      : false;
+                    return isActive ? "nav-link active" : "nav-link";
+                  }}
                   to={`/@${profile.username}/favorites`}
                 >
                   Favorited Articles
