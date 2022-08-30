@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useProfile from "../../hooks/useProfile";
 const ProfilePage: FC = () => {
   const { profile, btnClasses, params, handleClick, isAuthor } = useProfile();
+  console.log(profile);
   return (
     <div className="profile-page">
       <div className="user-info">

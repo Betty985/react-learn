@@ -7,7 +7,7 @@ function useProfile() {
   const { profileStore } = useStores();
   const { currentUser } = useCurrentUser();
   const params = useParams();
-  const [btnClasses, setBtn] = useState("");
+  const [btnClasses, setBtn] = useState("btn btn-sm action-btn");
   const [profile, setProfile] = useState(profileStore.profile);
   const [isAuthor, setIsAuthor] = useState(
     profile?.username === currentUser?.username
@@ -33,7 +33,6 @@ function useProfile() {
   }, []);
   useEffect(() => {
     if (profile.username !== params.name) {
-      console.log(profile.name, params.username);
       profileStore.loadProfile(params.username).then(() => {
         setProfile(profileStore.profile);
         setIsAuthor(profile?.username === currentUser.username);
