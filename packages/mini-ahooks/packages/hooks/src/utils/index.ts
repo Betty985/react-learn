@@ -4,3 +4,4 @@ is:
 谓词为 parameterName is Type这种形式， parameterName必须是来自于当前函数签名里的一个参数名。
  */
 export const isNumber=(value:unknown):value is number=>typeof value==='number'
+

@@ -47,7 +47,7 @@ const useCountdown = (options: Options = {}) => {
       return targetDate;
     }
   }, [leftTime, targetDate]);
-  //   为什么写成回调函数?
+
   const [timeLeft, setTimeLeft] = useState(() => calcLeft(target));
   const onEndRef = useLatest(onEnd);
   useEffect(() => {
