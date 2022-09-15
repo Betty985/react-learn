@@ -1,19 +1,9 @@
-import React, { FC, useState } from "react";
-import useStores from "../../../../hooks/useStores";
-interface A {
-  currentUser: any;
-  slug: any;
-}
-const CommentInput: FC<A> = (props) => {
-  const { commentsStore } = useStores();
-  const [body, setBody] = useState("");
-  const { isCreatingComment } = commentsStore;
-  const createComment = (e) => {
-    e.preventDefault();
-    commentsStore.createComment({ body: body }).then(() => {
-      setBody("");
-    });
-  };
+import React, { FC } from "react";
+import useCurrentUser from "../../../../hooks/useCurrentUser";
+import useComments from "../../../../hooks/useComments";
+const CommentInput: FC = () => {
+  const { isCreatingComment, body, onChange, createComment } = useComments();
+  const { currentUser } = useCurrentUser();
   return (
     <form className="card comment-form" onSubmit={createComment}>
       <div className="card-block">
@@ -22,13 +12,13 @@ const CommentInput: FC<A> = (props) => {
           placeholder="Write a comment...."
           value={body}
           disabled={isCreatingComment}
-          onChange={(e) => setBody(e.target.value)}
+          onChange={onChange}
           rows={3}
         />
       </div>
       <div className="card-footer">
         <img
-          src={props.currentUser.image}
+          src={currentUser.image}
           className="comment-author-img"
           alt="comment-author-img"
         />

@@ -15,7 +15,8 @@ const commentsStore = makeAutoObservable({
   loadComments() {
     this.isLoadingComments = true;
     this.commentErrors = undefined;
-    return agent.comments.forArticle(this.articleSlug)
+    return agent.comments
+      .forArticle(this.articleSlug)
       .then(
         action(({ comments }) => {
           this.comments = comments;
@@ -23,7 +24,7 @@ const commentsStore = makeAutoObservable({
       )
       .catch(
         action((err) => {
-          this.commentErrors = err?.response?.body?.errors;
+          this.commentErrors = err;
           throw err;
         })
       )
@@ -35,7 +36,8 @@ const commentsStore = makeAutoObservable({
   },
   createComment(comment) {
     this.isCreatingComment = true;
-    return agent.comments.create(this.articleSlug, comment)
+    return agent.comments
+      .create(this.articleSlug, comment)
       .then(() => this.loadComments())
       .finally(
         action(() => {

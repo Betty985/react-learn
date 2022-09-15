@@ -8,9 +8,11 @@ function useProfile() {
   const params = useParams();
   const [btnClasses, setBtn] = useState(INIT_BTN);
   const [profile, setProfile] = useState(profileStore.profile);
-  const profileRef=useRef(profile)
-  profileRef.current=profile
-  const [isAuthor, setIsAuthor] = useState(()=>params.username === userStore.currentUser.username);
+  const profileRef = useRef(profile);
+  profileRef.current = profile;
+  const [isAuthor, setIsAuthor] = useState(
+    () => params.username === userStore.currentUser.username
+  );
   const [isLoadingProfile, setLoadingProfile] = useState(true);
   const handleClick = (e) => {
     e.preventDefault();
@@ -25,22 +27,24 @@ function useProfile() {
     }
   };
   useEffect(() => {
-    profileStore.loadProfile(params.username).then(()=>{
-        setProfile(profileStore.profile); 
-        if (currentUser) {
-          setIsAuthor(()=>profileStore.profile.username === currentUser.username);
-        } else {
-          setIsAuthor(false);
-        }
+    profileStore.loadProfile(params.username).then(() => {
+      setProfile(profileStore.profile);
+      if (currentUser) {
+        setIsAuthor(
+          () => profileStore.profile.username === currentUser.username
+        );
+      } else {
+        setIsAuthor(false);
+      }
     });
-  },[currentUser,params.username]);
-  useEffect(()=>{
+  }, [currentUser, params.username]);
+  useEffect(() => {
     setLoadingProfile(profileStore.isLoadingProfile);
-  })
- 
+  });
+
   return {
     isLoadingProfile,
-    profile:profileRef.current,
+    profile: profileRef.current,
     isAuthor,
     btnClasses,
     params,

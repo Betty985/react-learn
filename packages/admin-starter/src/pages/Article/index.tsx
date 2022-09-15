@@ -1,28 +1,16 @@
 import React, { FC } from "react";
-import { useNavigate } from "react-router-dom";
-import { marked } from "marked";
 import RedError from "../../components/RedError";
 import ArticleMeta from "./components/ArticleMeta";
 import CommentContainer from "./components/Comment";
-import useStores from "../../hooks/useStores";
 import useArticle from "../../hooks/useArticle";
-import DOMPurify from "dompurify";
+import useCurrentUser from "../../hooks/useCurrentUser";
+import useComments from "../../hooks/useComments";
 const Article: FC = () => {
-  const { articlesStore, commentsStore, userStore } = useStores();
-  const { canModify, article, comments, isLoading, slug } = useArticle();
-  const navigate = useNavigate();
-  const handleDeleteArticle = (slug) => {
-    articlesStore
-      .deleteArticle(slug)
-      .then(() => navigate("/", { replace: true }));
-  };
-  const handleDeleteComment = (id) => {
-    commentsStore.deleteComment(id);
-  };
-  const { currentUser } = userStore;
-  const { commentErrors } = commentsStore;
-  const clean = DOMPurify.sanitize(article.body);
-  const markup = { __html: marked.parse(clean) };
+  const { markup, canModify, article, slug, handleDeleteArticle } =
+    useArticle();
+  const { comments, isLoading, handleDeleteComment, commentErrors } =
+    useComments();
+  const { currentUser } = useCurrentUser();
   if (!article) return <RedError message="无法加载文章" />;
   return (
     <div className="article-page">

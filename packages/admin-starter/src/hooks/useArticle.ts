@@ -8,7 +8,7 @@ function useArticle() {
   const params = useParams();
   const [comments, setComments] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [article, setArticle] = useState(()=>({
+  const [article, setArticle] = useState(() => ({
     author: {
       bio: null,
       following: false,
