@@ -1,8 +1,6 @@
-// TODO:
 import type { BasicTarget } from '../utils/domTarget';
 import { getTargetElement } from '../utils/domTarget';
-
-declare type TargetValue<T> = T | undefined | null;
+import type {TargetValue} from './domTarget'
 
 const checkIfAllInShadow = (targets: BasicTarget[]): boolean => {
   return targets.every((item) => {
