@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import useStores from "./useStores";
 import { useParams } from "react-router-dom";
 import useCurrentUser from "./useCurrentUser";
+import { marked } from "marked";
+import * as DOMPurify from 'dompurify';
 function useArticle() {
   const { articlesStore, commentsStore } = useStores();
   const { currentUser } = useCurrentUser();
   const params = useParams();
+  const handleDeleteArticle = (slug) => {
+    articlesStore.deleteArticle(slug);
+  };
   const [comments, setComments] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [article, setArticle] = useState(() => ({
@@ -15,7 +20,7 @@ function useArticle() {
       image: "",
       username: "",
     },
-    body: undefined,
+    body: "",
     tagList: [],
     title: "",
     createdAt: "",
@@ -25,6 +30,9 @@ function useArticle() {
     slug: "",
     updatedAt: "",
   }));
+  const body=article.body.replace(/\\n/g,'\n\n')
+  const clean=DOMPurify.sanitize(marked.parse(body));
+  const markup = { __html:  clean};
   //   todo:类型
   const [canModify, setModify] = useState(false);
   const [slug, setSlug] = useState(params.id);
@@ -43,6 +51,6 @@ function useArticle() {
     });
   }, [params]);
 
-  return { canModify, article, slug, comments, isLoading };
+  return { markup,canModify, article, slug, comments, isLoading,handleDeleteArticle };
 }
 export default useArticle;

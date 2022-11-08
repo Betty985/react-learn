@@ -9,7 +9,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
-  "keywords": [],
+  "keywords": ["react"],
   "author": "",
   "license": "ISC",
   "dependencies": {

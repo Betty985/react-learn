@@ -5,7 +5,8 @@ import CommentContainer from "./components/Comment";
 import useArticle from "../../hooks/useArticle";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import useComments from "../../hooks/useComments";
-const Article: FC = () => {
+import { observer } from "mobx-react";
+const Article =observer( () => {
   const { markup, canModify, article, slug, handleDeleteArticle } =
     useArticle();
   const { comments, isLoading, handleDeleteComment, commentErrors } =
@@ -52,6 +53,6 @@ const Article: FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Article;
